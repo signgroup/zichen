@@ -1,0 +1,32 @@
+/* pageHome/album/index.wxss */
+
+.upload{
+display: flex;
+     flex-wrap: wrap;
+     box-sizing: border-box;
+     background-color: #fff;
+     margin: 30rpx  0;
+     padding:30rpx;
+
+}
+.image-box{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 230rpx;
+     height: 230rpx;
+     border: 1px solid #eee;
+     position: relative;
+     box-sizing: border-box;
+}
+.image-box image{
+     width: 100%;
+     height: 100%;
+}
+.add-box{
+     flex-direction: column;
+}
+.add-box image{
+     width: 30%;
+     height: 30%;
+}

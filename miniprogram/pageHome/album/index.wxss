@@ -1,0 +1,2 @@
+/* pageHome/album/index.wxss */
+@import './../../stylues/album.wxss';

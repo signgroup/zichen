@@ -1,0 +1,87 @@
+/* pageHome/album/index.wxss */
+.form-group {
+     background-color: #fff;
+     padding: 1rpx 30rpx;
+     display: flex;
+     align-items: center;
+     min-height: 100rpx;
+     justify-content: space-between;
+
+}
+
+.form-group+.form-group {
+     border-top: 1rpx solid #eee;
+
+}
+
+.form-group .title {
+     text-align: justify;
+     padding-right: 30rpx;
+     font-size: 30rpx;
+     position: relative;
+     height: 60rpx;
+     line-height: 60rpx;
+
+}
+
+.form-group .title {
+     min-width: calc(4em + 30rpx);
+}
+
+.form-group input {
+     flex: 1;
+     font-size: 30rpx;
+     color: #555;
+     padding-right: 20rpx;
+
+}
+
+.form-group.border-none {
+     border: none;
+}
+
+.img-box{
+     width: 100%;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     margin-bottom: 20rpx;
+}
+
+.img-box image{
+     width: 330rpx;
+     height: 330rpx;
+     position: relative;
+}
+
+
+
+
+.img-show {
+     width: 365rpx;
+     height: 365rpx;
+     margin: 0 auto;
+     transition: show .3s ease;
+}
+
+.img-hide {
+     width: 0;
+     height: 0;
+     transition: hide .3s ease;
+}
+
+.img-box .img-default {
+     width: 100%;
+     height: 100%;
+     background: #e2e2e2;
+     position: absolute;
+     top: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.img-default image {
+     width: 30%;
+     height: 30%;
+}

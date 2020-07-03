@@ -1,0 +1,65 @@
+{
+     "pages": [
+          "pages/home/index",
+          "pages/mine/index"
+     ],
+     "subpackages": [
+          {
+               "root": "pageHome",
+               "name": "pack1",
+               "pages": [
+                    "album/index",
+                    "video/index"
+               ]
+          },
+          {
+               "root": "pageMine",
+               "name": "pack2",
+               "pages": [
+                    "apple/index",
+                    "banana/index"
+               ]
+          },
+          {
+               "root": "pageManage",
+               "name": "pack3",
+               "pages": [
+                    "album/index",
+                    "updateAlbum/index",
+                    "uploadAlbum/index"
+               ]
+          }
+     ],
+     "tabBar": {
+          "color": "#222",
+          "selectedColor": "#1296db",
+          "borderStyle": "black",
+          "backgroundColor": "#fff",
+          "list": [
+               {
+                    "pagePath": "pages/home/index",
+                    "text": "首页",
+                    "iconPath": "images/tabbar/home.png",
+                    "selectedIconPath": "images/tabbar/home_cur.png"
+               },
+               {
+                    "pagePath": "pages/mine/index",
+                    "text": "我的",
+                    "iconPath": "images/tabbar/mine.png",
+                    "selectedIconPath": "images/tabbar/mine_cur.png"
+               }
+          ]
+     },
+     "window": {
+          "navigationBarTextStyle": "black",
+          "navigationBarTitleText": "常毓",
+          "navigationBarBackgroundColor": "#fff",
+          "backgroundColor": "#fff",
+          "navigationStyle": "custom"
+     },
+     "usingComponents": {
+          "loading": "components/loading/index"
+     },
+     "sitemapLocation": "sitemap.json",
+     "style": "v2"
+}

@@ -1,0 +1,37 @@
+<!--pageHome/updateAlbum/index.wxml-->
+<form>
+	<view class="form-group margin-top">
+		<view class="title">标题</view>
+		<input placeholder="可填" value="{{albumData.title}}" data-type="title" bindinput="handelInput"></input>
+	</view>
+	<view class="form-group">
+		<view class="title">原图地址</view>
+		<input placeholder="http路径或cloud路径" value="{{albumData.src}}" data-type="src" bindinput="handelInput"></input>
+	</view>
+
+	<view class="form-group margin-top">
+		<view class="title">图片预览</view>
+	</view>
+
+	<view class="form-group  border-none">
+		<view class="img-box">
+			<view class="small">
+				<image mode="aspectFill" src="{{albumData.cloud}}" data-url="{{albumData.cloud}}" bindtap="previewImage" bindload='onLazyLoad' class="{{albumData.load?'img-show':'img-hide'}}" lazy-load='true'>
+					<!-- 懒加载默认图 -->
+					<view class="{{albumData.load?'img-hide':'img-default'}}">
+						<image src='https://preview.cloud.189.cn/image/imageAction?param=4E93CB01D2262C5A9E1C8C56E4DFA143889C4A55770FA38D356781DF20C03B131C83164FE444AA57F16292990738E63F957798BAAD27AD211BC07D6462DBB721D014637B0C7F330C1B86D6BACC14CDE547281A1E8A4C93F35AEF8BCB'></image>
+					</view>
+				</image>
+			</view>
+			<view class="large">
+				<image mode="aspectFill" src="{{albumData.src}}" data-url="{{albumData.src}}" bindtap="previewImage"></image>
+			</view>
+		</view>
+	</view>
+	<view class="margin-top">
+		<button type="primary" plain loading="{{btnLoading}}" bindtap="btnUpdate" disabled="{{btnLoading}}">修改</button>
+	</view>
+
+</form>
+
+<loading hidden="{{hiddenLoading}}" />

@@ -1,0 +1,18 @@
+<!--pageHome/uploadAlbum/index.wxml-->
+
+
+<view class="upload">
+	
+	<view class="image-box " wx:for="{{filePath}}" wx:for-index="index" wx:for-item="item"  data-item="{{item}}" wx:key="*this" data-url="{{item}}" bindtap="previewImage" >
+		<image src="{{item}}"  mode="aspectFill"></image>
+	</view>
+	
+	<view class="image-box add-box" bindtap="chooseImage">
+		<image src="{{iconCamera}}" ></image>
+		<text>照片</text>
+	</view>
+</view>
+
+<button type="primary" plain loading="{{btnLoading}}" bindtap="handleConfirm" disabled="{{btnLoading}}">上传</button>
+
+<loading hidden="{{hiddenLoading}}" />

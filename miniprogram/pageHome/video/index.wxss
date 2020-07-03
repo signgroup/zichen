@@ -1,0 +1,78 @@
+/* miniprogram/pages/home/video/index.wxss */
+
+.video {
+     padding: 30rpx;
+     display: flex;
+     flex-direction: column;
+}
+
+.video-item {
+    margin-bottom: 30rpx;
+     border-bottom: solid 1px #efefef;
+}
+
+.wrapper {
+     width: 690rpx;
+     height: 400rpx;
+     position: relative;
+}
+
+.video-style {
+     width: 690rpx;
+     height: 400rpx;
+}
+
+.video-image {
+     width: 690rpx;
+     height: 400rpx;
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: 99;
+}
+
+.videoPlay {
+     position: absolute;
+     width: 80rpx;
+     height: 80rpx;
+     top: 50%;
+     left: 50%;
+     margin: -40rpx 0 0 -40rpx;
+     z-index: 100;
+}
+
+.video-name {
+     margin-top: 10rpx;
+     font-family: PingFangSC-Medium;
+     font-size: 34rpx;
+     color: #333;
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 1;
+     overflow: hidden;
+}
+
+.video-desc {
+     font-family: PingFangSC-Regular;
+     font-size: 26rpx;
+     color: #666;
+     margin-top: 10rpx;
+     /* display: -webkit-box; */
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 2;
+     overflow: hidden;
+}
+
+.duration{
+     background-color: rgba(0, 0, 0, .3);
+     padding: 2rpx 16rpx;
+     height: 30rpx;
+     line-height: 30rpx;
+     color: #fff;
+     font-size: 24rpx;
+     position: absolute;
+     bottom: 10rpx;
+     right: 10rpx;
+     border-radius:8rpx;
+     z-index: 101;
+}

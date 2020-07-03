@@ -1,0 +1,27 @@
+<!--pages/mine/index.wxml-->
+<view class="screen">
+  <!-- 登录开始 -->
+  <view class="head-bg-box ">
+    <view class="head-bg ">
+
+    </view>
+    <view class="login-box slide_up" animation="{{slide_up1}}">
+      <view class="head-portrait" bindtap="onGetUserInfo">
+          <!-- <image src="{{avatarUrl}}"></image> -->
+        <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{avatarUrl}})"></button>
+      </view>
+      <text class="nickname" >{{logged?userInfo.nickName:'登录'}}</text>
+      <block wx:if="{{manageData[1].state}}">
+        <view class="sign slide_up" animation="{{slide_up6}}" bindtap="btnSign">
+          <label class="sign-icon"><text class="{{manageData[1].icon}} lg " style="color:#ed1c24"></text></label>
+        <text>{{manageData[1].name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 登录结束 -->
+
+<button type='default' bindtap="goManage">管理</button>
+
+<view class="circle"></view>
+</view>   

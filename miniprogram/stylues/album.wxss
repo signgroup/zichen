@@ -1,0 +1,224 @@
+/* 相册和管理相册公用 */
+.skew-title {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 30rpx auto;
+}
+
+.skew-title text {
+     position: relative;
+     display: inline-block;
+     width: 60rpx;
+     height: 70rpx;
+     margin: auto;
+     z-index: 2;
+     text-align: center;
+     color: #fff;
+     font-family: 'roboto condensed';
+     font-weight: 700;
+     font-size: 46rpx;
+     line-height: 70rpx;
+     -webkit-transform: skewY(-15deg);
+     transform: skewY(-15deg);
+     -webkit-transform-origin: 0 100%;
+     transform-origin: 0 100%;
+     transition: all 0.2s;
+     cursor: default;
+}
+
+.skew-title text:after,
+.skew-title text:before {
+     display: block;
+     top: 0;
+     left: 0;
+     width: 60rpx;
+     height: 70rpx;
+     position: absolute;
+     background: lightgreen;
+     content: ' ';
+     z-index: -1;
+     transition: all 0.2s;
+}
+
+.skew-title text::before {
+     background: rgba(0, 0, 0, 0.1);
+     -webkit-transform: skewY(15deg);
+     transform: skewY(15deg);
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+}
+
+.skew-title text:nth-child(even) {
+     background-color: lightgreen;
+     -webkit-transform: skewY(15deg);
+     transform: skewY(15deg);
+     -webkit-transform-origin: 100% 100%;
+     transform-origin: 100% 100%;
+     color: #d9d9d9;
+}
+
+.skew-title text:nth-child(even):before {
+     -webkit-transform-origin: 100% 0;
+     transform-origin: 100% 0;
+     -webkit-transform: skewY(-15deg);
+     transform: skewY(-15deg);
+}
+
+.skew-title text:nth-child(even):after {
+     background-color: #9ee29e;
+}
+
+
+.skew-title .active text {
+     -webkit-transform: skewY(0);
+     transform: skewY(0);
+     color: #fff;
+}
+
+.skew-title .active text:before {
+     -webkit-transform: skewY(0);
+     transform: skewY(0);
+}
+
+.skew-title .active text:nth-child(even):after {
+     background-color: lightgreen;
+}
+
+.photo-list {
+     width: 100%;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+    
+}
+
+.img-box {
+     position: relative;
+     margin-bottom: 20rpx;
+}
+
+.large .img-box {
+     width: 100%;
+     height: 750rpx;
+}
+
+.small .img-box {
+     width: 365rpx;
+     height: 365rpx;
+}
+
+.grid .img-box {
+     width: 240rpx;
+     height: 240rpx;
+     margin-bottom: 16rpx;
+}
+
+.grid image {
+     width: 240rpx;
+     height: 240rpx;
+}
+
+.img-box image {
+     width: 100%;
+     height: 100%;
+     position: relative;
+}
+
+
+
+
+.img-show {
+     width: 365rpx;
+     height: 365rpx;
+     margin: 0 auto;
+     transition: show .3s ease;
+}
+
+.img-hide {
+     width: 0;
+     height: 0;
+     transition: hide .3s ease;
+}
+
+.img-box .img-default {
+     width: 100%;
+     height: 100%;
+     background: #e2e2e2;
+     position: absolute;
+     top: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.img-default image {
+     width: 30%;
+     height: 30%;
+}
+
+.img-box .title {
+     width: calc(100% - 20rpx);
+     padding: 10rpx;
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     z-index: 999;
+     background-color: rgba(0, 0, 0, .3);
+     padding: 10rpx;
+     color: #fff;
+}
+
+.ribbon {
+
+     position: absolute;
+     top: -6px;
+     right: 10px;
+     z-index: 100;
+}
+
+.ribbon::after {
+     position: absolute;
+     content: "";
+     display: block;
+     width: 0;
+     height: 0;
+     border-left: 60rpx solid transparent;
+     border-right: 64rpx solid transparent;
+     border-top: 14rpx solid #F8463F;
+}
+
+.ribbon text {
+     position: relative;
+     display: inline-block;
+     text-align: center;
+     background: #F8463F;
+     color: #fff;
+     font-size: 12px;
+     line-height: 1;
+     padding: 16rpx 14rpx 10rpx;
+     border-top-right-radius: 8px;
+}
+
+.ribbon text::before {
+     position: absolute;
+     content: "";
+     display: block;
+     background: #F8463F;
+     height: 12rpx;
+     width: 12rpx;
+     left: -12rpx;
+     top: 0;
+}
+
+.ribbon text::after {
+     position: absolute;
+     content: "";
+     display: block;
+     background: #C02031;
+     height: 12rpx;
+     width: 16rpx;
+     border-radius: 16rpx 16rpx 0 0;
+     left: -16rpx;
+     top: 0;
+}
