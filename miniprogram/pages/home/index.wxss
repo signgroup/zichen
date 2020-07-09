@@ -208,6 +208,7 @@ page {
   top: 30rpx;
   overflow: hidden;
   height: 52rpx;
+  border-radius: 30rpx;
 }
 
 .word {
@@ -426,6 +427,7 @@ page {
   display: inline-block;
   vertical-align: top;
   position: relative;
+  overflow: hidden;
 }
 
 

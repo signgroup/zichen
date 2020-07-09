@@ -68,7 +68,7 @@ Page({
 		"--duration: 12; --delay: 10; --x: 3; --y: 8; --scale: 0.09704484059877645;",
 		"--duration: 7; --delay: 9; --x: 1; --y: 3; --scale: 0.0055741895438983224;",
 		"--duration: 9; --delay: 9; --x: 5; --y: 9; --scale: 0.040727917495630164;",
-          ]
+          ],
 
      },
 
@@ -76,18 +76,6 @@ Page({
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
-          // const _this = this
-          // db.collection("home_nav").get({
-          //      success(res) {
-          //           console.log(JSON.stringify(res.data))
-          //           let homeNavData = res.data
-          //           // _this.setData({
-          //           //      homeNavData
-          //           // })
-          //      }
-          // })
-
-          // this.getHomeNav()
           this.getWatchHomeNav()
      },
 
@@ -116,7 +104,6 @@ Page({
       * 生命周期函数--监听页面卸载
       */
      onUnload: function () {
-
      },
 
      /**

@@ -59,6 +59,7 @@ Component({
 /**
  * 调用方法
  * loadingIndex小于0或大于27使用随机
- * <home-loading loadingIndex="27"></home-loading>
+ * <home-loading hidden="{{hiddenLoading}}" loadingIndex="27"></home-loading>
+ * 
  * 
  */

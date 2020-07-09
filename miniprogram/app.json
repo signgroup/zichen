@@ -9,15 +9,15 @@
                "name": "pack1",
                "pages": [
                     "album/index",
-                    "video/index"
+                    "video/index",
+                    "message/index"
                ]
           },
           {
                "root": "pageMine",
                "name": "pack2",
                "pages": [
-                    "apple/index",
-                    "banana/index"
+                    "manage/index"
                ]
           },
           {
@@ -26,7 +26,8 @@
                "pages": [
                     "album/index",
                     "updateAlbum/index",
-                    "uploadAlbum/index"
+                    "uploadAlbum/index",
+                    "video/index"
                ]
           }
      ],

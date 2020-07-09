@@ -1,0 +1,70 @@
+<view class="page-content {{!replyState?'button-padding':''}}">
+	<view class="explain">
+		爱留言的人比较有内涵！
+	</view>
+	<view class="mes-cell">
+		<textarea class="mes-textarea" focus='{{textFocus}}' value='{{content}}' bindinput='bindTextArea' placeholder="在这里输入您想要说的话" style="height: 6.3em" bindconfirm="showTopTips" />
+		<text class='text-num'>{{textNum}}/140</text>
+     </view>
+     <view class="weui-btn-area margin-top">
+          <button class="weui-btn" type="primary" disabled='{{disabled}}' bindtap="showTopTips">确定 {{currentTime!=60?(currentTime):''}}
+          </button>
+     </view>
+     <!-- 留言列表开始 -->
+     <view class="cu-list menu-avatar comment  margin-top solids-top">
+          <view class="cu-item" wx:for='{{messageList}}' wx:key="index" wx:for-index="index" wx:for-item="item">
+               <view class="cu-avatar round" style="background-image:url({{item.userInfo.avatarUrl}})">
+               </view>
+
+               <view class="content" >
+                   <view > 
+                         <view class="info-start">
+                              <view class="start-left info-start-left"  data-item="{{item}}"  data-id="{{item._id}}" data-type="" data-index="{{index}}"  bindtap="replyOpen">
+                                   <view class="text-grey ellipsis-1">{{item.userInfo.nickName}}</view>
+                                   <view class="flex justify-between">
+                                        <view class="text-gray  text-date"> {{item.date}}</view>
+                                   </view>
+                              </view>
+                              <view wx:if="{{openid==='oA0Eg0YGi_dsr4HeGdzmfgssHkh4' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}" class="start-right info-start-right text-gray"  data-item="{{item}}"  data-id="{{item._id}}" data-type="" data-index="{{index}}"  bindtap="mangeDelete"></view>
+                         </view>
+                         <view class="text-gray text-content  {{!item.overflow?'ellipsis-3':''}}"  data-index="{{index}}" bindtap="bindOverflow" >
+                              {{item.content}}
+                         </view>
+                   </view>
+                    <!-- 评论区域 -->
+                    <view class="replay-box" wx:for='{{item.reply}}' wx:for-index="replyIndex" wx:key="replyIndex" wx:for-item="replyItem" > 
+                         <view class="replay-avatar round" style="background-image:url({{replyItem.userInfo.avatarUrl}})">
+                         </view>
+                         <view class="replay-item">
+                              <view class="replay-start">
+                                   <view class="start-left replay-start-left" data-item="{{replyItem}}" data-id="{{item._id}}" data-type="reply" data-index="{{replyIndex}}" bindtap="replyOpen">
+                                        <text class="text-grey ellipsis-1">{{replyItem.userInfo.nickName}}{{replyItem.replyName?' 回复 '+replyItem.replyName:''}}</text>
+                                        <view class="flex justify-between">
+                                        <view class="text-gray  text-date"> {{replyItem.date}}</view>
+                                   </view>
+                                   </view>
+                                   <view wx:if="{{openid==='oA0Eg0YGi_dsr4HeGdzmfgssHkh4' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}" class="start-right replay-start-right text-gray" data-type="reply" data-item="{{replyItem}}" data-id="{{item._id}}"  bindtap="mangeDelete"></view>
+                              </view>
+                              <view  style="line-height:{{!replyItem.overflow?1.4:1}}">
+                                   <text class="replay-text  {{!replyItem.overflow?'ellipsis-3':''}}" data-type="reply" data-replyindex="{{replyIndex}}"  data-index="{{index}}" bindtap="bindOverflow">{{replyItem.content}}</text>
+                              </view>
+                         </view>
+                    </view>
+                    
+               </view>
+
+          </view>
+     </view>
+     <!-- 留言列表结束 -->
+
+     <view class="reply-box" hidden="{{replyState}}">
+          <input class="reply-input" focus="{{!replyState?'true':'false'}}"  value='{{inputContent}}' disabled="{{inputDisabled}}" bindinput='bindInput'  placeholder="{{replyPlace}}" bindblur="replyClose" confirm-type='send' bindconfirm="replySubmit" />
+     </view>
+
+
+     <!-- 返回顶部 -->
+     <view class="top" wx:if="{{topStatus}}" bindtap="goTop"></view>
+     <view class="cu-load {{!isLoad?'loading':'over'}}"></view>
+
+</view>
+<loading hidden="{{hiddenLoading}}"></loading>

@@ -19,6 +19,11 @@ button::after {
   border: none;
 }
 
+view, scroll-view, swiper, button, input, textarea, label, navigator, image {
+  box-sizing: border-box;
+  
+  }
+  
 
 page {
   background: #f6f6f6;

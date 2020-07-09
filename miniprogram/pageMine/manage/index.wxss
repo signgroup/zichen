@@ -1,0 +1,38 @@
+.main-container {
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+.app-box{
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.app-li {
+  width: 187.5rpx;
+  height: 167.5rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  z-index: 99;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-li image {
+  width:130rpx;
+  height: 130rpx;
+}
+
+
+.app-li text {
+  font-size: 24rpx;
+}

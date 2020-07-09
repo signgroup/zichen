@@ -1,4 +1,4 @@
-// pageMine/banana/index.js
+// miniprogram/components/loading/background/index.js
 Page({
 
      /**

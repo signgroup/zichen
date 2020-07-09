@@ -1,0 +1,12 @@
+<view class="main-container">
+	<view class="app-box" style="padding-top:{{statusBarHeight+45}}px">
+
+		<view class="app-li {{index==current?'moving':'normal'}}" wx:for="{{appList}}" data-index="{{index}}" wx:key="*this" data-item="{{item}}" bindtap="jumpClick">
+			<image data-index="{{index}}" src="{{item.src}}" />
+			<text>{{item.name}}</text>
+		</view>
+	</view>
+</view>
+
+<background />
+<loading hidden="{{hiddenLoading}}" />

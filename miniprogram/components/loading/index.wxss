@@ -345,7 +345,8 @@
 
 .ball-clip-rotate-pulse {
      position: relative;
-     width: 30px;
+     width: 60rpx;
+     height: 60rpx;
      -webkit-transform: translateY(-15px);
      -ms-transform: translateY(-15px);
      transform: translateY(-15px);
@@ -362,10 +363,10 @@
 
 .ball-clip-rotate-pulse>view:first-child {
      background: #fff;
-     height: 16px;
-     width: 16px;
-     top: 9px;
-     left: 9px;
+     height: 26rpx;
+     width: 26rpx;
+     top: 18rpx;
+     left: 18rpx;
      -webkit-animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
      animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
 }

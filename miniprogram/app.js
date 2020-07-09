@@ -13,16 +13,19 @@ App({
         traceUser: true,
       })
     }
+    let systemInfo={}
     // 获取手机系统信息
     wx.getSystemInfo({
       success: res => {
-        // console.log(res)
+        console.log(res)
+        systemInfo=res
       },
       fail(err) {
         console.log(err);
       }
     })
     this.globalData = {
+      systemInfo
     }
   }
 })
