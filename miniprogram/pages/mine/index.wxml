@@ -11,51 +11,44 @@
 			<text class="nickname" >{{logged?userInfo.nickName:'登录'}}</text>
 		</view>
 	</view>
-  <view ></view>
+	<view></view>
 	<!-- 登录结束 -->
 	<view class="card-menu">
 		<view class="menu-item arrow">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-visitor.png"></image>
 				<text>访客</text>
-        <view class="item-right">
-        <block  wx:for="{{users}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-          <image src="{{item.userInfo.avatarUrl}}"></image>
-          </block>
-        </view>
+				<view class="item-right">
+					<block wx:for="{{users}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+						<image src="{{item.userInfo.avatarUrl}}"></image>
+					</block>
+				</view>
 			</view>
 		</view>
-		<view class="menu-item arrow" bindtap="subMsg"> 
-			<view class="content">
-				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-subscribe.png"></image>
-				<text>订阅</text>
-			</view>
-		</view>
-	</view>
-
-	<view class="card-menu">
 		<view class="menu-item arrow">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-setup.png"></image>
 				<text>设置</text>
 			</view>
 		</view>
+	</view>
 
+	<view class="card-menu">
 		<view class="menu-item arrow" bindtap="loginOut">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-logout.png"></image>
 				<text>退出</text>
 			</view>
 		</view>
-	</view>
-	<view class="card-menu"  wx:if="{{openid==='ozh_943nwfhAIxlvAoohEbw_nm88' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}">
-		<view class="menu-item arrow" bindtap="goManage">
+
+		<view class="menu-item arrow" bindtap="goManage" wx:if="{{openid==='ozh_943nwfhAIxlvAoohEbw_nm88' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-manage.png"></image>
 				<text>管理</text>
 			</view>
 		</view>
 	</view>
+
 
 	<view class="circle"></view>
 </view>

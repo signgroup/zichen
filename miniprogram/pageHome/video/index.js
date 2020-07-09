@@ -5,57 +5,21 @@ Page({
       * 页面的初始数据
       */
      data: {
+          hiddenLoading: false, //loading状态
           videoIndex: null,
-		videoList: [
-			{
-				'coverimg':"https://goss.veer.com/creative/vcg/veer/800water/veer-146156021.jpg",
-				'description':"天翼网盘",
-				'id':"41",
-				'resource_add':"https://tiger.cdnja.co/v/br/brgKe.mp4?secure=B1tLkIxOeZex3cLDr_YK9A&expires=1593599400",
-				'title':" 第三期 Beatles 02",
-				'type':"1"
-			},
-			
-			{
-				'coverimg':"https://goss.veer.com/creative/vcg/veer/800water/veer-146156021.jpg",
-				'description':"这是第一个示例，这是第一个示例，这是第一个示例，这是第一个示例。这是第一个示例，这是第一个示例，这是第一个示例，这是第一个示例。",
-				'id':"41",
-				'resource_add':"http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-				'title':" 第三期 Beatles 02",
-				'type':"1"
-			},
-			{
-				'coverimg': "https://goss.veer.com/creative/vcg/veer/800water/veer-146156021.jpg",
-				'description': "",
-				'id': "42",
-				'resource_add': "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-				'title': " 第三期 Beatles 02",
-				'type': "1"
-			},
-			{
-				'coverimg': "https://goss.veer.com/creative/vcg/veer/800water/veer-146156021.jpg",
-				'description': "",
-				'id': "43",
-				'resource_add': "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-				'title': " 第三期 Beatles 02",
-				'type': "1"
-			},
-			{
-				'coverimg': "https://goss.veer.com/creative/vcg/veer/800water/veer-146156021.jpg",
-				'description': "",
-				'id': "44",
-				'resource_add': "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-				'title': " 第三期 Beatles 02",
-				'type': "1"
-               },
-          ],
+		videoList: [],//视频数据
+		skip: 0, //分页开始取值
+          limit: 20, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
+          more: false, //没有更多数据
                
      },
      /**
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
+		this.getCount()
 
+          this.getVideoData()
      },
 
      /**
@@ -89,20 +53,102 @@ Page({
       * 页面相关事件处理函数--监听用户下拉动作
       */
      onPullDownRefresh: function () {
-
+		this.getCount()
+          wx.showNavigationBarLoading();
+          this.setData({
+               skip: 0,
+               photoData: [],
+               more: false
+          })
+          this.getVideoData();
+          wx.stopPullDownRefresh(); //停止下拉元点
      },
 
      /**
       * 页面上拉触底事件的处理函数
       */
      onReachBottom: function () {
-
+		console.log(!this.data.more)
+          if (!this.data.more) {
+               wx.showNavigationBarLoading();
+               this.getVideoData();
+          }
      },
 
      /**
       * 用户点击右上角分享
       */
      onShareAppMessage: function () {
+
+	},
+
+	// 获取总条数
+     getCount() {
+          wx.cloud.callFunction({
+                    name: 'getCount',
+                    data: {
+                         db: "video"
+                    }
+               })
+               .then(res => {
+                    wx.setNavigationBarTitle({
+                         title: `视频(${res.result.total})`
+                    })
+               })
+     },
+	
+	// 获取数据导航
+     getVideoData() {
+          console.log("this.data.skip", this.data.skip)
+          wx.cloud.callFunction({
+                    name: "getCloud",
+                    data: {
+                         db: "video",
+                         skip: this.data.skip, //条件限制，根据需要传参
+                         limit: this.data.limit
+                    }
+               }).then(res => {
+                    console.log(res)
+                    let data = res.result.data
+                    console.log(data)
+                    //urls 用来接收查看图片集合
+                    let urls = []
+                    //判断返回条数
+                    if (data.length === this.data.limit) {
+                         this.setData({
+                              skip: this.data.skip + this.data.limit
+                         })
+                    } else {
+                         //more=true 没有数据啦
+                         this.setData({
+                              more: true
+                         })
+                    }
+                    let videoList = this.data.videoList
+                    if (videoList.length !== 0) {
+                         //不是第一次获取 ES6 展开运算或数组拼接
+                         //photoData.concat(data)
+                         //[...photoData,...data]   
+                         photoData = [...videoList, ...data]
+                    } else {
+                         //第一次直接赋值
+                         videoList = data
+                         urls = data.map(item => item.cloud)
+
+                    }
+                    console.log('videoList', videoList)
+
+                    this.setData({
+                         videoList,
+                         hiddenLoading: true
+                    })
+                    wx.hideNavigationBarLoading()
+                    // console.clear()
+               })
+               .catch(res => {
+                    console.log(res)
+                    wx.hideNavigationBarLoading()
+               })
 
      },
      loadedmetaData(e){
@@ -117,7 +163,6 @@ Page({
                url:'./details'
           })
      },
-//展开
 	//原本没有upStatus这个字段，所以默认值为false
 	upDown(event) {
 		var index = event.currentTarget.dataset['index'];
@@ -131,9 +176,6 @@ Page({
 	videoPlay(event) {
 		var length = this.data.videoList.length;
           var index = event.currentTarget.dataset['index'];
-         
-
-
 		if (!this.data.videoIndex) { // 没有播放时播放视频
 			this.setData({
 				videoIndex: index

@@ -677,26 +677,53 @@ Page({
           console.log('replyType',replyType)
           console.log('replyIndex',replyIndex) 
           console.log('messageId',messageId) 
-         
-          wx.cloud.callFunction({
-                    name: 'messageReplay',
-                    data: {
-                    id: messageId,
-                    params: params,
-                    sort:replyType==='reply'?replyIndex:-1
-               }
+
+
+
+
+          let _this = this
+               let cheResult = _this.checkoutText(_this.data.inputContent.trim())
+               cheResult.then((res) => {
+                    if (res ?.error ?.errCode === 87014) {
+                         console.log('敏感')
+                         wx.showModal({
+                              content: '内容含有违法违规内容',
+                              showCancel: false,
+                              success: function (res) {
+                                   if (res.confirm) {
+                                        console.log('用户点击确定')
+                                        _this.setData({
+                                             disabled: false
+                                        });
+
+                                   }
+                              }
+                         });
+                    } else {
+                         wx.cloud.callFunction({
+                              name: 'messageReplay',
+                              data: {
+                              id: messageId,
+                              params: params,
+                              sort:replyType==='reply'?replyIndex:-1
+                         }
+                         })
+                         .then(res => {
+                              console.log(res.result)
+                              _this.messageQuery();
+                              _this.setData({
+                                   inputContent:''
+                              })
+                         }).catch((err)=>{
+                              _this.setData({
+                                   inputContent:''
+                              })
+                         })
+                    }
                })
-               .then(res => {
-                    console.log(res.result)
-                    this.messageQuery();
-                    this.setData({
-                         inputContent:''
-                    })
-               }).catch((err)=>{
-                    this.setData({
-                         inputContent:''
-                    })
-               })
+
+
+        
                
      },
  

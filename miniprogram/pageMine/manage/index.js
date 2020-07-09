@@ -138,29 +138,6 @@ Page({
           } else {
                this.subMsg()
           }
-
-          // switch (item.type) {
-          //      case '1':
-          //           wx.navigateTo({
-          //                url: "./../../pageManage/album/index"
-          //           })
-          //           break;
-          //      case 'subscribe':
-          //           this.subMsg()
-          //           break;
-          //      case 'app':
-          //           wx.switchTab({
-          //                url: './../../pages/mine/index'
-          //           })
-          //           break;
-          //      case 'video':
-          //           wx.navigateTo({
-          //                url: "./../../pageManage/video/index"
-          //           })
-          //           break;
-          //      default:
-          //           break
-          // }
      },
 
 })

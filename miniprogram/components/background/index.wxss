@@ -596,10 +596,10 @@
    }
    @keyframes fall-45 {
      42.043% {
-       transform: translate(1.7437vw, 42.043vh) scale(0.7472);
+       transform: translate(1.7437vw, 42.043vh) scale(.6);
      }
      to {
-       transform: translate(4.82945vw, 100vh) scale(0.7472);
+       transform: translate(4.82945vw, 100vh) scale(1.6);
      }
    }
    .snow:nth-child(46) {

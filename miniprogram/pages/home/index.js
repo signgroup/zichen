@@ -136,34 +136,11 @@ Page({
                url: "./video/index"
           })
      },
-
-     // 获取数据导航
-     getHomeNav() {
-          wx.cloud.callFunction({
-                    name: "getCloud",
-                    data: {
-                         db: "home_nav",
-                         skip: 0, //条件限制，根据需要传参
-                         limit: 6
-                    }
-               }).then(res => {
-                    let homeNavData = res.result.data
-                    console.log(homeNavData)
-                    this.setData({
-                         homeNavData,
-                         hiddenLoading: true
-                    })
-               })
-               .catch(res => {
-                    console.log(res)
-
-               })
-
-     },
      //监听数据导航
      getWatchHomeNav() {
           let _this = this
-          db.collection('home_nav').watch({
+          db.collection('home_nav')
+          .watch({
                onChange: function (snapshot) {
                     console.log(snapshot)
                     let homeNavData = snapshot.docs
@@ -179,10 +156,14 @@ Page({
      },
      // 点击nav跳转
      ballClick(e) {
-          console.log(e.currentTarget.dataset.item)
-          let path = e.currentTarget.dataset.item.path
-          wx.navigateTo({
-               url: path
-          })
+         
+          let {item} = e.currentTarget.dataset
+          if(item.state){
+               console.log(e.currentTarget.dataset.item)
+               wx.navigateTo({
+                    url: item.path
+               })
+          }
+         
      },
 })
