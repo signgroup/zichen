@@ -9,8 +9,8 @@
                "name": "pack1",
                "pages": [
                     "album/index",
-                    "video/index",
-                    "message/index"
+                    "message/index",
+                    "video/index"
                ]
           },
           {
@@ -26,8 +26,8 @@
                "pages": [
                     "album/index",
                     "updateAlbum/index",
-                    "uploadAlbum/index",
-                    "video/index"
+                    "uploadAlbum/index"
+                   
                ]
           }
      ],

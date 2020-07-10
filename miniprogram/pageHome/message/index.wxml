@@ -27,9 +27,18 @@
                               </view>
                               <view wx:if="{{openid==='oA0Eg0YGi_dsr4HeGdzmfgssHkh4' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}" class="start-right info-start-right text-gray"  data-item="{{item}}"  data-id="{{item._id}}" data-type="" data-index="{{index}}"  bindtap="mangeDelete"></view>
                          </view>
-                         <view class="text-gray text-content  {{!item.overflow?'ellipsis-3':''}}"  data-index="{{index}}" bindtap="bindOverflow" >
+                       
+                         
+
+                         <view class="text-examine"  wx:if="{{item.state}}" >
+                              <text>*****</text>
+                              <text class="text-examine-style">留言待审核通过后可展示</text>
+                         </view>
+
+                           <view class="text-gray text-content  {{!item.overflow?'ellipsis-3':''}}"  data-index="{{index}}" bindtap="bindOverflow" wx:else>
                               {{item.content}}
                          </view>
+
                    </view>
                     <!-- 评论区域 -->
                     <view class="replay-box" wx:for='{{item.reply}}' wx:for-index="replyIndex" wx:key="replyIndex" wx:for-item="replyItem" > 
@@ -45,9 +54,17 @@
                                    </view>
                                    <view wx:if="{{openid==='oA0Eg0YGi_dsr4HeGdzmfgssHkh4' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}" class="start-right replay-start-right text-gray" data-type="reply" data-item="{{replyItem}}" data-id="{{item._id}}"  bindtap="mangeDelete"></view>
                               </view>
-                              <view  style="line-height:{{!replyItem.overflow?1.4:1}}">
+                            
+                              <view class="text-examine" wx:if="{{replyItem.state}}">
+                                   <text>*****</text>
+                                   <text class="text-examine-style">评论待审核通过后可展示</text>
+                              </view>
+
+                                <view  style="line-height:{{!replyItem.overflow?1.4:1}}" wx:else>
                                    <text class="replay-text  {{!replyItem.overflow?'ellipsis-3':''}}" data-type="reply" data-replyindex="{{replyIndex}}"  data-index="{{index}}" bindtap="bindOverflow">{{replyItem.content}}</text>
                               </view>
+
+
                          </view>
                     </view>
                     

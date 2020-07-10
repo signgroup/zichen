@@ -97,7 +97,7 @@ Page({
                })
      },
 	
-	// 获取数据导航
+	// 获取数据
      getVideoData() {
           console.log("this.data.skip", this.data.skip)
           wx.cloud.callFunction({
@@ -157,12 +157,6 @@ Page({
           this.videoContext.requestFullScreen({ direction: direction });
      },
     
-     //播放视频
-     playVideo(){
-          wx.navigateTo({
-               url:'./details'
-          })
-     },
 	//原本没有upStatus这个字段，所以默认值为false
 	upDown(event) {
 		var index = event.currentTarget.dataset['index'];
@@ -172,21 +166,21 @@ Page({
 		})
 	},
 	
-	//播放视频
+	//播
 	videoPlay(event) {
 		var length = this.data.videoList.length;
           var index = event.currentTarget.dataset['index'];
-		if (!this.data.videoIndex) { // 没有播放时播放视频
+		if (!this.data.videoIndex) { // 没有播
 			this.setData({
 				videoIndex: index
 			})
 			var videoContext = wx.createVideoContext('video' + index)
 			videoContext.play()
 		} else {
-			//停止正在播放的视频
+			//停止正在播
 			var videoContextPrev = wx.createVideoContext('video' + this.data.videoIndex)
 			videoContextPrev.stop()
-			//将点击视频进行播放
+			//将点击进行播
 			this.setData({
 				videoIndex: index
 			})

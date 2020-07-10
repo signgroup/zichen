@@ -337,3 +337,7 @@ button::after {
      margin-left: 20rpx;
      flex: 1;
 }
+
+.text-examine{
+     font-size: 28rpx;
+}

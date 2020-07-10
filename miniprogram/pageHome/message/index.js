@@ -30,20 +30,23 @@ Page({
           state: false,
           isLoad: false, //下拉加载状态
           replyState: true,
-          replyPlace:'爱评论的人比较有修养！',
-          inputDisabled:false,
-          inputContent:'',
-          currentMessage:{},
-          messageId:'',
-          replyIndex:-1,
-          replyType:'',
-          openid:wx.getStorageSync('openId')
+          replyPlace: '爱评论的人比较有修养！',
+          inputDisabled: false,
+          inputContent: '',
+          currentMessage: {},
+          messageId: '',
+          replyIndex: -1,
+          replyType: '',
+          openid: wx.getStorageSync('openId'),
+          examineState:false,
      },
 
      /**
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
+          this.getState()
+          this.getCount()
           this.messageQuery()
 
 
@@ -175,7 +178,35 @@ Page({
 
      },
 
-
+     //获取留言状态
+     getState(){
+          wx.cloud.callFunction({
+               name: 'getCloud',
+               data: {
+                    db: "all_state"
+               }
+          })
+          .then(res => {
+               console.log(res.result.data[0].status)
+               this.setData({
+                    examineState:res.result.data[0].status
+               })
+          })
+     },
+     // 获取总条数
+     getCount() {
+          wx.cloud.callFunction({
+                    name: 'getCount',
+                    data: {
+                         db: "message"
+                    }
+               })
+               .then(res => {
+                    wx.setNavigationBarTitle({
+                         title: `我的留言(${res.result.total})`
+                    })
+               })
+     },
      //获取文本域内容
      bindTextArea: function (e) {
           this.setData({
@@ -193,10 +224,12 @@ Page({
 
           let params = {
                content: this.data.content,
+               state: this.data.examineState,
                openId: wx.getStorageSync('openId'),
                userInfo: wx.getStorageSync('userInfo'),
                date: util.formatTime(new Date())
           }
+          console.log('params',params)
 
           wx.cloud.callFunction({
                     name: 'addCloud',
@@ -409,16 +442,20 @@ Page({
 
      //文字展开隐藏
      bindOverflow(e) {
-          const data= this.data.messageList
+          const data = this.data.messageList
           console.log(e.currentTarget.dataset.index)
-          const {index,type,replyindex} = e.currentTarget.dataset
-          if(type==='reply'){
+          const {
+               index,
+               type,
+               replyindex
+          } = e.currentTarget.dataset
+          if (type === 'reply') {
                console.log(replyindex)
-               data[index].reply[replyindex].overflow=!data[index].reply[replyindex].overflow
-          }else{
+               data[index].reply[replyindex].overflow = !data[index].reply[replyindex].overflow
+          } else {
                data[index].overflow = !data[index].overflow
           }
-          
+
           this.setData({
                messageList: data
           })
@@ -463,7 +500,7 @@ Page({
           }
      },
      //删除回复
-     onRemoveReply(counterId,data){
+     onRemoveReply(counterId, data) {
           console.log(counterId)
           console.log(data)
           if (counterId) {
@@ -471,10 +508,10 @@ Page({
                          name: 'removeReply',
                          data: {
                               id: counterId,
-                              places:{
-                                   openId:data.openId,
-                                   date:data.date,
-                                   content:data.content
+                              places: {
+                                   openId: data.openId,
+                                   date: data.date,
+                                   content: data.content
                               }
                          }
                     })
@@ -484,8 +521,8 @@ Page({
                               wx.showToast({
                                    title: '删除成功',
                               });
-                              
-                         }else{
+
+                         } else {
                               wx.showToast({
                                    title: '当前留言不存在或已被删除',
                               });
@@ -587,16 +624,20 @@ Page({
           }
      },
      //管理员删除
-     mangeDelete(e ){
-          const {item,id,type} = e.currentTarget.dataset;
-          let _this=this
+     mangeDelete(e) {
+          const {
+               item,
+               id,
+               type
+          } = e.currentTarget.dataset;
+          let _this = this
           wx.showActionSheet({
                itemList: ['删除'],
                success: function (res) {
                     console.log('res', res);
-                    if(type==='reply'){
-                         _this.onRemoveReply(id,item)
-                    }else{
+                    if (type === 'reply') {
+                         _this.onRemoveReply(id, item)
+                    } else {
                          _this.onRemove(id);
                     }
                }
@@ -604,43 +645,48 @@ Page({
      },
      //显示评论输入框
      replyOpen(e) {
-          const {item,id,type,index} = e.currentTarget.dataset;
+          const {
+               item,
+               id,
+               type,
+               index
+          } = e.currentTarget.dataset;
           // console.log('item',item)
           // console.log('id',id)
           // console.log('type',type)
           // console.log('index',index)
-          if(wx.getStorageSync('openId')){
+          if (wx.getStorageSync('openId')) {
                if (item.openId === wx.getStorageSync('openId')) {
                     let _this = this;
                     wx.showActionSheet({
                          itemList: ['删除'],
                          success: function (res) {
                               console.log('res', res);
-                              if(type==='reply'){
-                                   _this.onRemoveReply(id,item)
-                              }else{
+                              if (type === 'reply') {
+                                   _this.onRemoveReply(id, item)
+                              } else {
                                    _this.onRemove(id);
                               }
                          }
                     });
-               }else{
+               } else {
                     this.setData({
-                         replyIndex:index,
-                         replyType:type,
-                         messageId:id,
+                         replyIndex: index,
+                         replyType: type,
+                         messageId: id,
                          replyState: false,
-                         replyPlace:`回复${item.userInfo.nickName}`,
-                         currentMessage:item
+                         replyPlace: `回复${item.userInfo.nickName}`,
+                         currentMessage: item
                     })
                }
-          }else{
+          } else {
                this.setData({
                     replyState: false,
-                    inputDisabled:true,
-                    replyPlace:'请登录'
+                    inputDisabled: true,
+                    replyPlace: '请登录'
                })
           }
-         
+
      },
      //隐藏评论输入框
      replyClose() {
@@ -651,80 +697,86 @@ Page({
      //获取评论内容
      bindInput(e) {
           // console.log(e.detail.value)
-          let inputContent=e.detail.value
+          let inputContent = e.detail.value
           this.setData({
                inputContent
           })
      },
      //评论提交
-     replySubmit(){
+     replySubmit() {
           console.log('提交')
-          
-          const {replyType,replyIndex,currentMessage,messageId}=this.data
+
+          const {
+               replyType,
+               replyIndex,
+               currentMessage,
+               messageId
+          } = this.data
 
 
-          let params={
-               content:this.data.inputContent,
-               date:util.formatTime(new Date()),
-               openId:wx.getStorageSync('openId'),
-               userInfo:wx.getStorageSync('userInfo')
+          let params = {
+               content: this.data.inputContent,
+               state: this.data.examineState,
+               date: util.formatTime(new Date()),
+               openId: wx.getStorageSync('openId'),
+               userInfo: wx.getStorageSync('userInfo')
           }
-          if(replyType==='reply'){
-               params.replyName=currentMessage.userInfo.nickName
+          if (replyType === 'reply') {
+               params.replyName = currentMessage.userInfo.nickName
           }
-          console.log('data',currentMessage)
-          console.log('params',params)
-          console.log('replyType',replyType)
-          console.log('replyIndex',replyIndex) 
-          console.log('messageId',messageId) 
+          console.log('data', currentMessage)
+          console.log('params', params)
+          console.log('replyType', replyType)
+          console.log('replyIndex', replyIndex)
+          console.log('messageId', messageId)
 
 
 
 
           let _this = this
-               let cheResult = _this.checkoutText(_this.data.inputContent.trim())
-               cheResult.then((res) => {
-                    if (res ?.error ?.errCode === 87014) {
-                         console.log('敏感')
-                         wx.showModal({
-                              content: '内容含有违法违规内容',
-                              showCancel: false,
-                              success: function (res) {
-                                   if (res.confirm) {
-                                        console.log('用户点击确定')
-                                        _this.setData({
-                                             disabled: false
-                                        });
+          let cheResult = _this.checkoutText(_this.data.inputContent.trim())
+          cheResult.then((res) => {
+               if (res ?.error ?.errCode === 87014) {
+                    console.log('敏感')
+                    wx.showModal({
+                         content: '内容含有违法违规内容',
+                         showCancel: false,
+                         success: function (res) {
+                              if (res.confirm) {
+                                   console.log('用户点击确定')
+                                   _this.setData({
+                                        disabled: false
+                                   });
 
-                                   }
                               }
-                         });
-                    } else {
-                         wx.cloud.callFunction({
+                         }
+                    });
+               } else {
+                    wx.cloud.callFunction({
                               name: 'messageReplay',
                               data: {
-                              id: messageId,
-                              params: params,
-                              sort:replyType==='reply'?replyIndex:-1
-                         }
+                                   id: messageId,
+                                   params: params,
+                                   sort: replyType === 'reply' ? replyIndex : -1
+                              }
                          })
                          .then(res => {
                               console.log(res.result)
                               _this.messageQuery();
                               _this.setData({
-                                   inputContent:''
+                                   inputContent: ''
                               })
-                         }).catch((err)=>{
+                         }).catch((err) => {
                               _this.setData({
-                                   inputContent:''
+                                   inputContent: ''
                               })
                          })
-                    }
-               })
+               }
+          })
 
 
-        
-               
+
+
      },
- 
+
 })
