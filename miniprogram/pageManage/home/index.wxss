@@ -1,0 +1,51 @@
+
+.card-menu {
+  overflow: hidden;
+  border-radius: 20rpx;
+  margin:30rpx;
+
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  padding-left: 40rpx;
+  min-height: 100rpx;
+  background-color: rgba(255, 255, 255, 1);
+  justify-content: space-between;
+  align-items: center;
+  transition: all .6s ease-in-out 0s;
+  transform: translateX(0rpx);
+  position: relative;
+  border-bottom: 1rpx solid #eee;
+}
+.menu-item:last-child{
+  border-bottom: 0;
+
+}
+.menu-item .content {
+  font-size: 30rpx;
+  line-height: 1.6em;
+  flex: 1;
+  color: #8799a3;
+
+}
+.content image{
+  width:30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+  position: relative;
+  top: 3rpx;
+}
+
+.item-right{
+  float: right;
+
+}
+.item-right image{
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+switch{
+transform: scale(.7);
+}

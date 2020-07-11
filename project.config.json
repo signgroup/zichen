@@ -112,6 +112,13 @@
 					"pathName": "pageManage/manage/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页管理",
+					"pathName": "pageManage/home/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
