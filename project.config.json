@@ -107,9 +107,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "管理",
-					"pathName": "pageMine/manage/index",
+					"pathName": "pageManage/manage/index",
 					"query": "",
 					"scene": null
 				}

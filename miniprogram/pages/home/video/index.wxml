@@ -8,7 +8,7 @@
                     title="{{item.title}}" />
 				 <block  wx:else>
 					<image class='video-image' mode='aspectFill' src='{{item.coverimg}}'></image>
-					<image class='videoPlay'  data-index='{{index}}' bindtap='videoPlay' src='./../../images/play.png'></image>
+					<image class='videoPlay'  data-index='{{index}}' bindtap='videoPlay' src='./../../../images/play.png'></image>
 					<text class="duration">00:15</text>
 				</block>
 			</view>

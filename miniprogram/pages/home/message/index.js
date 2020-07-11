@@ -1,4 +1,4 @@
-import util from './../../utils/index'
+import util from './../../../utils/index'
 
 const app = getApp()
 

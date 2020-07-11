@@ -111,7 +111,7 @@ Page({
   //跳转管理
   goManage() {
     wx.navigateTo({
-      url: "./../../pageMine/manage/index"
+      url: "./../../pageManage/manage/index"
     })
   },
   // 用户授权登录
@@ -232,31 +232,4 @@ Page({
       })
       
   },
-  //消息订阅
-  subMsg(){
-    const templateId ='-rej8CUBzdB6cA8dJw0W1SZQObZJziDqFL4v8lnujBk'; // 订阅消息模版id
-    wx.requestSubscribeMessage({
-         tmplIds: [templateId],
-         success(res) {
-           console.log(res)
-           if (res[templateId] == 'accept') {
-             //用户同意了订阅，允许订阅消息
-             wx.showToast({
-               title: '订阅成功'
-             })
-           } else {
-             //用户拒绝了订阅，禁用订阅消息
-             wx.showToast({
-               title: '订阅失败'
-             })
-           }
-         },
-         fail(res) {
-           console.log(res)
-         },
-         complete(res) {
-           console.log(res)
-         }
-       })
-  }
 })

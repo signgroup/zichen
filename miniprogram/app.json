@@ -8,26 +8,14 @@
                "root": "pageHome",
                "name": "pack1",
                "pages": [
-                    "album/index",
-                    "message/index",
-                    "video/index"
-               ]
-          },
-          {
-               "root": "pageMine",
-               "name": "pack2",
-               "pages": [
-                    "manage/index"
+                    "album/index"
                ]
           },
           {
                "root": "pageManage",
-               "name": "pack3",
+               "name": "pack2",
                "pages": [
-                    "album/index",
-                    "updateAlbum/index",
-                    "uploadAlbum/index"
-                   
+                    "manage/index"
                ]
           }
      ],
@@ -53,10 +41,11 @@
      },
      "window": {
           "navigationBarTextStyle": "black",
-          "navigationBarTitleText": "常毓",
+          "navigationBarTitleText": "",
           "navigationBarBackgroundColor": "#fff",
-          "backgroundColor": "#fff",
-          "navigationStyle": "custom"
+          "enablePullDownRefresh": true,
+
+          "backgroundColor": "#fff"
      },
      "usingComponents": {
           "loading": "components/loading/index"

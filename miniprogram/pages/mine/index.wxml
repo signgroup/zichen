@@ -19,7 +19,7 @@
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-visitor.png"></image>
 				<text>访客</text>
 				<view class="item-right">
-					<block wx:for="{{users}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+					<block wx:for="{{users}}" wx:for-index="index" wx:for-item="item" wx:key="_id">
 						<image src="{{item.userInfo.avatarUrl}}"></image>
 					</block>
 				</view>

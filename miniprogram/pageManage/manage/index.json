@@ -1,5 +1,8 @@
 {
   "usingComponents": {
     "background": "./../../components/background/index"
-}
+},
+"navigationStyle": "custom",
+"enablePullDownRefresh": false
+
 }

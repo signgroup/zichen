@@ -25,6 +25,7 @@
   text-align: center;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .app-li image {
@@ -35,4 +36,37 @@
 
 .app-li text {
   font-size: 24rpx;
+}
+
+
+/* 懒加载 */
+
+.img-show {
+  width: 130rpx;
+  height: 130rpx;
+  margin: 0 auto;
+  transition: show .3s ease;
+}
+
+.img-hide {
+  width: 0;
+  height: 0;
+  transition: hide .3s ease;
+}
+
+.img-default {
+  width:130rpx;
+  height: 130rpx;
+  background: #e2e2e2;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rpx;
+}
+
+.img-default image {
+  width: 50%;
+  height: 50%;
 }

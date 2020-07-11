@@ -73,6 +73,19 @@ Page({
 
      },
 
+      //图片懒加载
+      onLazyLoad(e) {
+          // console.log(e)
+          if (e.detail.width) {
+               this.data.appList[e.currentTarget.dataset.index].load = true
+               setTimeout(() => {
+                    this.setData({
+                         appList: this.data.appList
+                    })
+               }, 300);
+          }
+     },
+//获取图标数据
      getManageApp(){
           wx.cloud.callFunction({
                name: "getCloud",

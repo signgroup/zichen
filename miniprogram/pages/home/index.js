@@ -126,16 +126,6 @@ Page({
      onShareAppMessage: function () {
 
      },
-     goToMypage() {
-          wx.navigateTo({
-               url: "../../pageageHome/cat/index"
-          })
-     },
-     modalVideo() {
-          wx.navigateTo({
-               url: "./video/index"
-          })
-     },
      //监听数据导航
      getWatchHomeNav() {
           let _this = this
