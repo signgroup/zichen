@@ -66,13 +66,6 @@
 				},
 				{
 					"id": -1,
-					"name": "我的视频",
-					"pathName": "pageHome/video/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "我的",
 					"pathName": "pages/mine/index",
 					"query": "",
@@ -117,6 +110,13 @@
 					"id": -1,
 					"name": "首页管理",
 					"pathName": "pageManage/home/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的视频",
+					"pathName": "pages/home/video/index",
 					"query": "",
 					"scene": null
 				}

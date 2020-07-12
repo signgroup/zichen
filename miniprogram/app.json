@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/mine/index"
+    "pages/mine/index",
+    "pages/home/video/index"
   ],
   "subpackages": [
     {

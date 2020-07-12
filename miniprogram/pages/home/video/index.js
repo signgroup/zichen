@@ -164,8 +164,49 @@ Page({
 		this.setData({
 			videoList: this.data.videoList
 		})
-	},
-	
+     },
+     
+     // 监听滚动条当前位置
+     onPageScroll: function (e) {
+          // console.log(e)
+          if (e.scrollTop > 400) {
+               this.setData({
+                    topStatus: true
+               });
+          } else {
+               this.setData({
+                    topStatus: false
+               });
+          }
+     },
+	//回到顶部
+     goTop: function (e) { // 一键回到顶部
+          if (wx.pageScrollTo) {
+               wx.pageScrollTo({
+                    scrollTop: 0
+               })
+          } else {
+               wx.showModal({
+                    title: '提示',
+                    content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+               })
+          }
+     },
+     updatePlayCount(){
+           wx.cloud.callFunction({
+                 name: 'updateC',
+                 data: {
+                   db: "blog",
+                   id: id,
+                   params: {
+                     view:parseInt(view + 1),
+                   }
+                 }
+               })
+                 .then(res => {
+                   console.log(res.result)
+                 })
+     },
 	//播
 	videoPlay(event) {
 		var length = this.data.videoList.length;
