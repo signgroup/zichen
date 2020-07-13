@@ -14,7 +14,7 @@
 	<view></view>
 	<!-- 登录结束 -->
 	<view class="card-menu">
-		<view class="menu-item arrow">
+		<navigator hover-class="navigator-hover"  class="menu-item arrow"  url="./../../pageMine/visitor/index">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-visitor.png"></image>
 				<text>访客</text>
@@ -24,7 +24,7 @@
 					</block>
 				</view>
 			</view>
-		</view>
+		</navigator>
 		<view class="menu-item arrow">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-setup.png"></image>

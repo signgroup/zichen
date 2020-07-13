@@ -10,7 +10,7 @@
      <!-- 图片列表 -->
      <view class="photo-list {{imgType}}">
         <navigator hover-class="navigator-hover" 
-         class="img-box"  wx:for='{{photoData}}' wx:for-index="index" wx:for-item="item" wx:key="index" data-id='{{item._id}}'  url="./../updateAlbum/index?id={{item._id}}"
+         class="img-box"  wx:for='{{photoData}}' wx:for-index="index" wx:for-item="item" wx:key="index" data-id='{{item._id}}'  url="./../updateAlbum/index?id={{item._id}}&sheet={{datasheet}}"
         >
         <view class="primary" wx:if="{{item.src}}"><text>原</text> </view>
                <view class="ribbon" wx:if="{{item.cloud}}">
@@ -35,7 +35,13 @@
                     <text  class="title ellipsis-1">{{item.title}}</text>
                </block>
           </navigator>
+
+          <view class="no-data" wx:if="{{more}}">
+		<text>--没有更多了--</text>
+	</view>
      </view>
+
+     
      <!-- 上传按钮 -->
      <view class="fixed-button">
           <button type="default" plain="true" bindtap="btnUpload">上传</button>

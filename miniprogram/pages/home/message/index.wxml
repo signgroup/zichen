@@ -80,7 +80,7 @@
 
 
      <!-- 返回顶部 -->
-     <view class="top" wx:if="{{topStatus}}" bindtap="goTop"></view>
+	<top topStatus="{{topStatus}}" />
      <view class="cu-load {{!isLoad?'loading':'over'}}"></view>
 
 </view>

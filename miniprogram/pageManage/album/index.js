@@ -20,7 +20,6 @@ Page({
                type: "grid"
           }], //图片类型切换数据
           photoData: [], //照片数据
-          urls: [], //存放图片url集合['http','http','http']
           skip: 0, //分页开始取值
           limit: 20, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
           more: false, //没有更多数据
@@ -31,8 +30,11 @@ Page({
       */
      onLoad: function (options) {
           let imgType = app.globalData.imgType ? app.globalData.imgType : "large"
+          console.log(options)
+          let datasheet=options.sheet
           this.setData({
-               imgType
+               imgType,
+               datasheet
           })
 
           this.getCount()
@@ -52,8 +54,7 @@ Page({
      /**
       * 生命周期函数--监听页面显示
       */
-     onShow: function () {
-     },
+     onShow: function () {},
 
      /**
       * 生命周期函数--监听页面隐藏
@@ -103,17 +104,17 @@ Page({
      },
      // 获取总条数
      getCount() {
-           wx.cloud.callFunction({
-               name: 'getCount',
-               data: {
-                    db: "photo"
-               }
-          })
-          .then(res => {
-               wx.setNavigationBarTitle({
-                    title: `照片(${res.result.total})`
+          wx.cloud.callFunction({
+                    name: 'getCount',
+                    data: {
+                         db:this.data.datasheet
+                    }
                })
-          })
+               .then(res => {
+                    wx.setNavigationBarTitle({
+                         title: `照片(${res.result.total})`
+                    })
+               })
      },
      // 获取数据导航
      getPhotoData() {
@@ -121,7 +122,7 @@ Page({
           wx.cloud.callFunction({
                     name: "getCloud",
                     data: {
-                         db: "photo",
+                         db:this.data.datasheet,
                          skip: this.data.skip, //条件限制，根据需要传参
                          limit: this.data.limit
                     }
@@ -129,8 +130,6 @@ Page({
                     console.log(res)
                     let data = res.result.data
                     console.log(data)
-                    //urls 用来接收查看图片集合
-                    let urls=[]
                     //判断返回条数
                     if (data.length === this.data.limit) {
                          this.setData({
@@ -148,19 +147,15 @@ Page({
                          //photoData.concat(data)
                          //[...photoData,...data]   
                          photoData = [...photoData, ...data]
-                         urls =[...this.data.urls, ...data.map(item => item.cloud)]
 
                     } else {
                          //第一次直接赋值
                          photoData = data
-                         urls = data.map(item => item.cloud)
                     }
                     console.log('photoData', photoData)
-                    console.log('urls', urls)
 
                     this.setData({
                          photoData,
-                         urls,
                          hiddenLoading: true
                     })
                     wx.hideNavigationBarLoading()
@@ -199,19 +194,12 @@ Page({
                }, 300);
           }
      },
-     //图片查看
-     updateImg: function (e) {
-          console.log(e)
+     //上传
+     btnUpload() {
           wx.navigateTo({
-               url: './../../pageManage/updateAlbum/index?id='+e.currentTarget.dataset.id
-             })
-     },
-//上传
-btnUpload(){
-     wx.navigateTo({
-          url: './../../pageManage/uploadAlbum/index'
-     })
+               url: './../../pageManage/uploadAlbum/index'
+          })
 
-}
+     }
 
 })

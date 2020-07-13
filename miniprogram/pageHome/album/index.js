@@ -9,6 +9,7 @@ Page({
      data: {
           hiddenLoading: false, //loading状态
           imgType: "", //tab选择类型,照片类型class
+          datasheet:'',//数据表
           tabData: [{
                word: ["大", "图"],
                type: "large"
@@ -30,9 +31,11 @@ Page({
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
+          let datasheet=options.sheet
           let imgType = app.globalData.imgType ? app.globalData.imgType : "large"
           this.setData({
-               imgType
+               imgType,
+               datasheet
           })
 
           this.getCount()
@@ -107,7 +110,7 @@ Page({
           wx.cloud.callFunction({
                     name: 'getCount',
                     data: {
-                         db: "photo"
+                         db: this.data.datasheet
                     }
                })
                .then(res => {
@@ -122,7 +125,7 @@ Page({
           wx.cloud.callFunction({
                     name: "getCloud",
                     data: {
-                         db: "photo",
+                         db: this.data.datasheet,
                          skip: this.data.skip, //条件限制，根据需要传参
                          limit: this.data.limit
                     }
@@ -149,11 +152,11 @@ Page({
                          //photoData.concat(data)
                          //[...photoData,...data]   
                          photoData = [...photoData, ...data]
-                         urls = [...this.data.urls, ...data.map(item => item.cloud)]
+                         urls = [...this.data.urls, ...data.map(item => item.src?item.src:item.cloud)]
                     } else {
                          //第一次直接赋值
                          photoData = data
-                         urls = data.map(item => item.cloud)
+                         urls = data.map(item =>  item.src?item.src:item.cloud)
 
                     }
                     console.log('photoData', photoData)
@@ -211,6 +214,20 @@ Page({
                fail: function (res) {},
                complete: function (res) {},
           })
+     },
+     
+     // 监听滚动条当前位置
+     onPageScroll: function (e) {
+          // console.log(e)
+          if (e.scrollTop > 400) {
+               this.setData({
+                    topStatus: true
+               });
+          } else {
+               this.setData({
+                    topStatus: false
+               });
+          }
      },
 
 

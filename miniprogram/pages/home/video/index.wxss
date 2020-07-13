@@ -16,6 +16,7 @@
      width: 690rpx;
      height: 400rpx;
      position: relative;
+     overflow: hidden;
 }
 
 .video-style {
@@ -25,7 +26,6 @@
 
 .video-image {
      width: 690rpx;
-     height: 400rpx;
      position: absolute;
      top: 0;
      left: 0;
@@ -78,28 +78,26 @@
      z-index: 101;
 }
 
-.top {
-     width: 140rpx;
-     position: fixed;
-     right: 10rpx;
-     bottom: 10rpx;
-     background-image: url("http://13s.top/weimage/wxapp/rocket_up.png");
-     /*background-size:424px 156px;*/
-     background-size: auto 248rpx;
-     height: 226rpx;
-     -webkit-transform-style: preserve-3d;
-     transform-style: preserve-3d;
-     animation: mlfly 0.3s steps(5, start) 0.5s infinite alternate;
-     /*//这里的3是210/70得来的。*/
-     z-index: 999;
+
+.no-data{
+     text-align: center;
+     background-image: -webkit-linear-gradient(left, #cddc39, #ff9800 25%, #cddc39 50%, #ff9800 75%, #cddc39);
+     -webkit-text-fill-color: transparent;
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-background-size: 200% 100%;
+     background-size: 200% 100%;
+     -webkit-animation: masked-animation 2s infinite linear;
+     animation: masked-animation 2s infinite linear;
 }
 
-@keyframes mlfly {
+
+@keyframes masked-animation {
      0% {
-          background-position: 0 0;
+       background-position: 0 0;
      }
-
+   
      100% {
-          background-position: -740rpx 0;
+       background-position: -100% 0;
      }
-}
+   }

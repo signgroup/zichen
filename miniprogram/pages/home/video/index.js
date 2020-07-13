@@ -1,4 +1,6 @@
 // miniprogram/pages/home/video/index.js
+const db = wx.cloud.database();
+
 Page({
 
      /**
@@ -9,7 +11,7 @@ Page({
           videoIndex: null,
 		videoList: [],//视频数据
 		skip: 0, //分页开始取值
-          limit: 20, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
+          limit: 10, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
           more: false, //没有更多数据
                
      },
@@ -151,6 +153,7 @@ Page({
                })
 
      },
+     //垂直方向
      loadedmetaData(e){
           let direction=e.detail.width>e.detail.height?90:0
           this.videoContext = wx.createVideoContext('video'+this.data.videoIndex, this);
@@ -179,44 +182,37 @@ Page({
                });
           }
      },
-	//回到顶部
-     goTop: function (e) { // 一键回到顶部
-          if (wx.pageScrollTo) {
-               wx.pageScrollTo({
-                    scrollTop: 0
+	
+     //修改本地自增次数
+     updatePlayCount(id,index){
+          wx.cloud.callFunction({
+               name: 'videoCount',
+               data: {
+               id: id,
+               }
                })
-          } else {
-               wx.showModal({
-                    title: '提示',
-                    content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+               .then(res => {
+                    console.log(res)
+               if(res.result.stats.updated===1){
+
+                    this.data.videoList[index].play++
+                    console.log(' this.data.videoList', this.data.videoList)
+               this.setData({
+                    videoList:this.data.videoList
                })
-          }
-     },
-     updatePlayCount(){
-           wx.cloud.callFunction({
-                 name: 'updateC',
-                 data: {
-                   db: "blog",
-                   id: id,
-                   params: {
-                     view:parseInt(view + 1),
-                   }
-                 }
+               }
                })
-                 .then(res => {
-                   console.log(res.result)
-                 })
      },
 	//播
 	videoPlay(event) {
-		var length = this.data.videoList.length;
-          var index = event.currentTarget.dataset['index'];
+          const {index,id} = event.currentTarget.dataset;
 		if (!this.data.videoIndex) { // 没有播
 			this.setData({
 				videoIndex: index
 			})
 			var videoContext = wx.createVideoContext('video' + index)
-			videoContext.play()
+               videoContext.play()
+               this.updatePlayCount(id,index)
 		} else {
 			//停止正在播
 			var videoContextPrev = wx.createVideoContext('video' + this.data.videoIndex)

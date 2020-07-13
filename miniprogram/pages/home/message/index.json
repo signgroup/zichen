@@ -1,4 +1,8 @@
 {
+    
+  "usingComponents": {
+    "top": "./../../components/top/index"
+},
      "navigationBarTitleText": "",
      "navigationStyle":"default",
      "navigationBarBackgroundColor":"#F9E0D9"

@@ -93,9 +93,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "我的留言",
-					"pathName": "pageHome/message/index",
+					"pathName": "pages/home/message/index",
 					"query": "",
 					"scene": null
 				},
@@ -117,6 +117,13 @@
 					"id": -1,
 					"name": "我的视频",
 					"pathName": "pages/home/video/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "访客",
+					"pathName": "pageMine/visitor/index",
 					"query": "",
 					"scene": null
 				}

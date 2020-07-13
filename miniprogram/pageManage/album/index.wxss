@@ -2,7 +2,7 @@
 @import './../../stylues/album.wxss';
 
 .photo-list {
-     padding-bottom: 124rpx;
+     padding-bottom: 150rpx;
 }
 
 .fixed-button {
@@ -39,4 +39,7 @@
 .primary text {
      color: #fff;
      font-size: 20rpx;
+}
+.no-data{
+     width: 100%;
 }

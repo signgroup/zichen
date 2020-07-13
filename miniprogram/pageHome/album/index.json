@@ -1,4 +1,7 @@
 {
+  "usingComponents": {
+    "top": "./../../components/top/index"
+},
   "navigationBarTitleText": "照片",
   "navigationStyle":"default"
 }

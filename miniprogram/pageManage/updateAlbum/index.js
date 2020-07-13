@@ -10,12 +10,18 @@ Page({
           hiddenLoading: false, //loading状态
           albumData: {}, //详情
           btnLoading: false, //按钮loading
+          datasheet:''
      },
 
      /**
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
+          let datasheet=options.sheet
+          this.setData({
+               datasheet
+          })
+          console.log(options)
           this.getImage(options.id)
      },
 
@@ -85,7 +91,7 @@ Page({
           wx.cloud.callFunction({
                name: "getCloud",
                data: {
-                    db: "photo",
+                    db: this.data.datasheet,
                     doc: id
                }
           }).then(res => {
@@ -138,7 +144,7 @@ Page({
           wx.cloud.callFunction({
                     name: 'updateCloud',
                     data: {
-                         db: "photo",
+                         db: this.data.datasheet,
                          id: data._id,
                          params: {
                               title: data.title,

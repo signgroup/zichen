@@ -151,7 +151,7 @@ Page({
                const uploadFile = async (item, index) => {
                     console.log(index)
                     await wx.cloud.uploadFile({
-                         cloudPath: 'album/photo/' + cloudPath[index], //云存储图片名字
+                         cloudPath: 'album/photo/hundred/' + cloudPath[index], //云存储图片名字
                          filePath: item, //临时路径
                          success: res => {
                               console.log('[上传文件] 成功：', res)

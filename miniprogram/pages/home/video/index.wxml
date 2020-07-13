@@ -1,5 +1,4 @@
 <!--miniprogram/pages/home/video/index.wxml-->
-
 <view class='video'>
 	<block wx:for="{{videoList}}" wx:for-index="index" wx:for-item="item" wx:key="index">
 		<view class='video-item'>
@@ -8,7 +7,7 @@
                     title="{{item.title}}" />
 				 <block  wx:else>
 					<image class='video-image' mode='aspectFill' src='{{item.coverimg}}'></image>
-					<image class='videoPlay'  data-index='{{index}}' bindtap='videoPlay' src='./../../../images/play.png'></image>
+					<image class='videoPlay' data-id="{{item._id}}"  data-index='{{index}}' bindtap='videoPlay' src='./../../../images/play.png'></image>
 					<text class="duration">{{item.time}}</text>
 				</block>
 			</view>
@@ -19,7 +18,10 @@
 			</block>
 		</view>
 	</block>
-	
+	<view class="no-data" wx:if="{{more}}">
+		<text>--没有更多了--</text>
+	</view>
      <!-- 返回顶部 -->
-     <view class="top" wx:if="{{topStatus}}" bindtap="goTop"></view>
+	<top topStatus="{{topStatus}}" />
 </view>
+<loading hidden="{{hiddenLoading}}"></loading>
