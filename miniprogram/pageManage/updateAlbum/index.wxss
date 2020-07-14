@@ -8,7 +8,10 @@
      justify-content: space-between;
 
 }
-
+.form-group textarea{
+     height: 120rpx;
+     padding: 20rpx;
+}
 .form-group+.form-group {
      border-top: 1rpx solid #eee;
 

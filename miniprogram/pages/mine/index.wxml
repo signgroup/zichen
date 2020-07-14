@@ -1,9 +1,8 @@
-<!--pages/mine/index.wxml-->
 <view class="screen">
 	<!-- 登录开始 -->
-	<view class="head-bg-box ">
+	<view class="head-bg-box " >
 		<view class="head-bg "></view>
-		<view class="login-box slide_up" animation="{{slide_up1}}">
+		<view class="login-box slide_up" style="top:{{statusBarHeight+58}}px">
 			<view class="head-portrait">
 				<!-- <image src="{{avatarUrl}}"></image> -->
 				<button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{avatarUrl}})"></button>

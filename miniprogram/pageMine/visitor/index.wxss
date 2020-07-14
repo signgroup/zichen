@@ -1,0 +1,97 @@
+/* miniprogram/pageMine/visitor/index.wxss */
+
+
+.users {
+
+     height: 100%;
+     display: flex;
+     flex-wrap: wrap;
+     align-content: flex-start;
+}
+
+.user-item {
+     width: 187.5rpx;
+     height: 167.5rpx;
+     margin-bottom: 30rpx;
+     display: flex;
+     z-index: 99;
+     flex-direction: column;
+     text-align: center;
+     align-items: center;
+     justify-content: space-between;
+     position: relative;
+}
+
+.user-item image {
+     width: 130rpx;
+     height: 130rpx;
+     border-radius: 50%;
+}
+
+
+.user-item text {
+     font-size: 24rpx;
+}
+
+
+
+
+.vistor {
+     background: linear-gradient(#A1E5E5, #1987AA);
+     width: 100%;
+     height: 100vh;
+     color: #fff;
+     background-size: 200% 100%;
+     overflow: hidden;
+     position: relative;
+}
+
+.circle {
+     width: 50px;
+     height: 50px;
+     background: none;
+     border-radius: 50%;
+     animation: circle 30s linear infinite alternate;
+     position: fixed;
+     top: 0;
+}
+
+@keyframes circle {
+     0% {
+          box-shadow: rgba(255, 255, 255, 0.1) 10px 25px, rgba(255, 255, 255, .1) 120px 275px 0 12px, rgba(255, 255, 255, 0) 60px 355px 0 23px, rgba(255, 255, 255, 0.1) 230px 445px 0 -8px, rgba(255, 255, 255, 0.1) 60px 125px, rgba(255, 255, 255, 0.1) 260px 145px 0 12px, rgba(255, 255, 255, 0.1) 100px 245px 0 23px, rgba(255, 255, 255, 0.1) 100px 85px 0 -8px, rgba(255, 255, 255, 0.1) 350px 555px, rgba(255, 255, 255, 0.1) 350px 273px 0 -2px, rgba(255, 255, 255, 0.1) 150px 355px 0 23px;
+     }
+
+     100% {
+          box-shadow: rgba(255, 255, 255, 0.1) 70px 10px, rgba(255, 255, 255, 0.1) 300px 205px 0 0px, rgba(255, 255, 255, 0.1) 0px 155px 0 100rpx, rgba(255, 255, 255, 0) 330px 45px 0 -8px, rgba(255, 255, 255, 0.1) 460px 325px, rgba(255, 255, 255, 0.1) 0px 445px 0 12px, rgba(255, 255, 255, 0.1) 300px 145px 0 23px, rgba(255, 255, 255, 0.1) 100px 85px 0 -8px, rgba(255, 255, 255, 0.1) 50px 155px, rgba(255, 255, 255, 0.1) 150px 273px 0 -2px, rgba(255, 255, 255, 0.1) 0px 555px 0 63px;
+     }
+}
+
+.card-menu {
+     overflow: hidden;
+     border-radius: 20rpx;
+     margin: 30rpx;
+
+}
+
+.no-data {
+     text-align: center;
+     background-image: -webkit-linear-gradient(left, #cddc39, #ff9800 25%, #cddc39 50%, #ff9800 75%, #cddc39);
+     -webkit-text-fill-color: transparent;
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-background-size: 200% 100%;
+     background-size: 200% 100%;
+     -webkit-animation: masked-animation 2s infinite linear;
+     animation: masked-animation 2s infinite linear;
+}
+
+
+@keyframes masked-animation {
+     0% {
+          background-position: 0 0;
+     }
+
+     100% {
+          background-position: -100% 0;
+     }
+}

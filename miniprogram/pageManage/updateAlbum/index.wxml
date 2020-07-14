@@ -6,7 +6,7 @@
 	</view>
 	<view class="form-group">
 		<view class="title">原图地址</view>
-		<input placeholder="http路径或cloud路径" value="{{albumData.src}}" data-type="src" bindinput="handelInput"></input>
+		 <textarea placeholder="http路径或cloud路径" value="{{albumData.src}}" maxlength="-1" data-type="src" bindblur="handelInput"  />
 	</view>
 
 	<view class="form-group margin-top">

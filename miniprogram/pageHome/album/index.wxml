@@ -9,7 +9,7 @@
 	</view>
      <!-- 图片列表 -->
      <view class="photo-list {{imgType}}">
-          <view class="img-box"  wx:for='{{photoData}}' wx:for-index="index" wx:for-item="item" wx:key="index" data-cloud='{{item.cloud}}'  bindtap="previewImage">
+          <view class="img-box"  wx:for='{{photoData}}' wx:for-index="index" wx:for-item="item" wx:key="index" data-src='{{item.src}}'  bindtap="previewImage">
           <!-- 真实图片 -->
                <image
                src="{{item.cloud}}"

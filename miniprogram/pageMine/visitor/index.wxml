@@ -1,0 +1,16 @@
+<!--miniprogram/pageMine/visitor/index.wxml-->
+<view class="vistor">
+
+	<view class="users">
+		<view class="user-item" wx:for="{{userData}}" wx:for-index="index" wx:for-item="item" wx:key="index" bindtap="handelUserInfo" data-item="{{item}}">
+			<image src="{{item.userInfo.avatarUrl}}" mode="aspectFill" class="{{item.load?'img-show':'img-hide'}}" lazy-load='true' data-index="{{index}}" bindload='onLazyLoad' />
+			<text class="ellipsis-1">{{item.userInfo.nickName}}</text>
+		</view>
+	</view>
+	<view class="circle"></view>
+	<view class="no-data" wx:if="{{more}}">
+		<text>--没有更多了--</text>
+	</view>
+	<!-- 返回顶部 -->
+	<top topStatus="{{topStatus}}" />
+</view>

@@ -126,6 +126,12 @@
 					"pathName": "pageMine/visitor/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的家庭",
+					"pathName": "pageHome/family/index",
+					"scene": null
 				}
 			]
 		}

@@ -12,6 +12,7 @@ Page({
     hiddenLoading: false, //loading是否隐藏
     userInfo: {}, //用户信息
     logged: false, //授权记录
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight, //获取导航栏高度，x适配
     users: [], //用户列表
   },
 
@@ -19,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log('statusBarHeight',this.data.statusBarHeight)
     console.log('onLoad', options)
     console.log('userInfo', app.globalData.userInfo )
     // 获取用户信息

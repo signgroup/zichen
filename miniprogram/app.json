@@ -8,7 +8,8 @@
                "root": "pageHome",
                "name": "pack1",
                "pages": [
-                    "album/index"
+                    "album/index",
+                    "family/index"
                ]
           },
           {

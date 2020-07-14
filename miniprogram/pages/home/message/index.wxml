@@ -81,7 +81,10 @@
 
      <!-- 返回顶部 -->
 	<top topStatus="{{topStatus}}" />
-     <view class="cu-load {{!isLoad?'loading':'over'}}"></view>
+     
+     <view class="no-data" wx:if="{{more}}">
+		<text>--没有更多了--</text>
+	</view>
 
 </view>
 <loading hidden="{{hiddenLoading}}"></loading>

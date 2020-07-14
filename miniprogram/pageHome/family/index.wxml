@@ -1,0 +1,53 @@
+<!--miniprogram/pageHome/family/index.wxml-->
+<view class="familly" style="background:{{background}};padding-top:{{statusBarHeight+58}}px">
+
+	<view class="content" wx:if="{{me.state}}">
+		<view class="info-box">
+			<view class="mark"></view>
+			<text>{{me.title}}</text>
+		</view>
+		<view class="contact-list">
+			<view class="contact-item" wx:for="{{me.data}}" wx:key="index">
+				<text class="contact-title">{{item.name}}</text>
+				<text class="contact-content">{{item.value}}</text>
+			</view>
+		</view>
+          <view class="contact-list">
+			<view class="contact-item">
+				<text class="contact-title">年龄</text>
+				<text class="contact-content">{{age}}</text>
+			</view>
+		</view>
+	</view>
+
+     <view class="content"  wx:if="{{dad.state}}">
+		<view class="info-box">
+			<view class="mark"></view>
+			<text>{{dad.title}}</text>
+		</view>
+		<view class="contact-list">
+			<view class="contact-item">
+				<text class="contact-content">{{dad.data}}</text>
+			</view>
+		</view>
+	</view>
+
+     <view class="content"  wx:if="{{mom.state}}">
+		<view class="info-box">
+			<view class="mark"></view>
+			<text>{{mom.title}}</text>
+		</view>
+		<view class="contact-list">
+			<view class="contact-item">
+				<text class="contact-content">{{mom.data}}</text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<movable-area>
+        <movable-view x="{{x}}" y="{{y}}" direction="all" bindtap="goHome">
+	   	<image class="movable-image" src="./../../images/tabbar/home_cur.png"></image>
+	   </movable-view>
+      </movable-area>
+<loading hidden="{{hiddenLoading}}" />

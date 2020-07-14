@@ -125,3 +125,28 @@ page {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+
+.no-data {
+  text-align: center;
+  background-image: -webkit-linear-gradient(left, #cddc39, #ff9800 25%, #cddc39 50%, #ff9800 75%, #cddc39);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-background-size: 200% 100%;
+  background-size: 200% 100%;
+  -webkit-animation: masked-animation 2s infinite linear;
+  animation: masked-animation 2s infinite linear;
+  padding: 20rpx;
+}
+
+
+@keyframes masked-animation {
+  0% {
+       background-position: 0 0;
+  }
+
+  100% {
+       background-position: -100% 0;
+  }
+}

@@ -10,23 +10,15 @@ Page({
       * 页面的初始数据
       */
      data: {
+          hiddenLoading: false, //loading状态
           content: '',
-          paging: 20,
           messageList: [],
-          isNotData: false,
-          isGetAllList: true,
-          voteArr: [],
           currentTime: 60,
           disabled: false,
           textFocus: true,
           timer: null,
-          firstRender: true,
           textNum: 0,
           loading: true,
-          StatusBar: app.globalData.StatusBar,
-          CustomBar: app.globalData.CustomBar,
-          Custom: app.globalData.Custom,
-          hiddenLoading: false,
           state: false,
           isLoad: false, //下拉加载状态
           replyState: true,
@@ -39,15 +31,17 @@ Page({
           replyType: '',
           openid: wx.getStorageSync('openId'),
           examineState:false,
+          skip: 0, //分页开始取值
+          limit: 20, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
+          more: false, //没有更多数据
      },
 
      /**
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
-          this.getState()
           this.getCount()
-          this.messageQuery()
+          this.getMessageData()
 
 
      },
@@ -65,10 +59,9 @@ Page({
           console.log("进入程序")
           wx.showNavigationBarLoading();
           this.setData({
-               firstRender: true,
-               paging: 20
+               limit: 20
           });
-          // this.messageQuery()
+          // this.getMessageData()
           //小程序后台后继续根据时间戳比较倒计时--非第一次
           if (app.globalData.nts) {
                var ts = new Date().getTime(); //获取当前时间戳--非第一次
@@ -111,64 +104,26 @@ Page({
       * 页面相关事件处理函数--监听用户下拉动作
       */
      onPullDownRefresh: function () {
-          wx.showLoading({
-               title: '加载中…',
-          })
+          this.getCount()
           wx.showNavigationBarLoading();
           this.setData({
-               paging: 20,
-               isLoad: false,
-               isGetAllList: true,
-               isNotData: false,
-               messageTimer: null
+               skip: 0,
+               messageList: [],
+               more: false
           })
-          this.messageQuery();
+          this.getMessageData();
           wx.stopPullDownRefresh(); //停止下拉元点
-          wx.hideLoading();
      },
 
      /**
       * 页面上拉触底事件的处理函数
       */
      onReachBottom: function () {
-          if (!this.data.isNotData) {
-               wx.showNavigationBarLoading()
-               var temp = []
-               console.log(this.data.paging)
-               mb.skip(this.data.paging)
-                    .limit(20)
-                    .orderBy('date', 'desc')
-                    .get()
-                    .then(res => {
-                         console.log(res)
-
-                         wx.hideNavigationBarLoading();
-                         if (res.data.length) {
-                              for (var i = 0; i < res.data.length; i++) {
-                                   var tempTopic = res.data[i];
-                                   this.data.messageList.push(tempTopic);
-                              }
-                              console.log(this.data.messageList)
-                              this.setData({
-
-                                   messageList: this.data.messageList,
-                                   paging: this.data.paging + 20
-                              })
-                         } else {
-                              this.setData({
-                                   isLoad: true,
-                                   isGetAllList: false,
-                                   isNotData: true
-                              })
-
-                         }
-
-                    })
-                    .catch(
-                         wx.hideNavigationBarLoading()
-                    )
+          console.log(!this.data.more)
+          if (!this.data.more) {
+               wx.showNavigationBarLoading();
+               this.getMessageData();
           }
-
      },
 
      /**
@@ -176,22 +131,6 @@ Page({
       */
      onShareAppMessage: function () {
 
-     },
-
-     //获取留言状态
-     getState(){
-          wx.cloud.callFunction({
-               name: 'getCloud',
-               data: {
-                    db: "all_state"
-               }
-          })
-          .then(res => {
-               console.log(res.result.data[0].status)
-               this.setData({
-                    examineState:res.result.data[0].status
-               })
-          })
      },
      // 获取总条数
      getCount() {
@@ -216,9 +155,6 @@ Page({
           console.log(e.detail.value)
           console.log(e.detail.value.length)
      },
-
-
-
      //添加留言内容
      addMessage() {
 
@@ -244,11 +180,10 @@ Page({
                     wx.showToast({
                          title: '留言成功',
                     })
-                    this.messageQuery();
+                    this.getMessageData();
                     this.setData({
-                         firstRender: true,
                          isLoad: false,
-                         paging: 20,
+                         limit: 20,
                          content: '',
                          textNum: 0
                     })
@@ -274,9 +209,6 @@ Page({
 
 
      },
-
-
-
      //提交留言
      showTopTips: function () {
           let storageUserInfo = wx.getStorageSync('userInfo')
@@ -351,8 +283,6 @@ Page({
                     })
           })
      },
-
-
      //留言倒计时
      interval() {
           let _this = this;
@@ -377,69 +307,62 @@ Page({
                }
           }, 1000)
      },
-
-
-     //消息列表查询---前10条
-     messageQuery() {
-          mb.limit(20)
-               //  .where({
-               //    state: false
-               //  })
-               .orderBy('date', 'desc')
-               .get()
-               .then(res => {
+     //获取留言数据
+     getMessageData() {
+          console.log("this.data.skip", this.data.skip)
+          wx.cloud.callFunction({
+                    name: "getCloud",
+                    data: {
+                         db: 'message',
+                         skip: this.data.skip, //条件限制，根据需要传参
+                         limit: this.data.limit,
+                         orderBy: {
+                              key: 'date',
+                              value: 'desc'
+                         },
+                    }
+               }).then(res => {
                     console.log(res)
-                    if (this.data.firstRender) {
+                    let data = res.result.data
+                    console.log(data)
+                    //urls 用来接收查看图片集合
+                    let urls = []
+                    //判断返回条数
+                    if (data.length === this.data.limit) {
                          this.setData({
-                              firstRender: !this.data.firstRender
-                         });
-                    } else {
-                         wx.hideToast();
-                    }
-                    wx.hideNavigationBarLoading();
-
-                    if (res.data.length) {
-                         if (res.data.length < 10) {
-                              this.setData({
-                                   isLoad: true,
-                                   isGetAllList: false,
-                                   isNotData: true,
-                              })
-                         }
-                         const newData = res.data.map(item => {
-                              item.date = util.formatTime(item.date)
-                              return item
-                         })
-                         console.log(newData)
-                         this.setData({
-                              messageList: newData,
-                              loading: false,
-                              hiddenLoading: true
+                              skip: this.data.skip + this.data.limit
                          })
                     } else {
+                         //more=true 没有数据啦
                          this.setData({
-                              isLoad: true,
-                              messageList: [],
-                              isGetAllList: false,
-                              loading: false,
-                              isNotData: true,
-                              hiddenLoading: true
+                              more: true
                          })
-
                     }
+                    let messageList = this.data.messageList
+                    if (messageList.length !== 0) {
+                         //不是第一次获取 ES6 展开运算或数组拼接
+                         //photoData.concat(data)
+                         //[...photoData,...data]   
+                         messageList = [...messageList, ...data]
+                    } else {
+                         //第一次直接赋值
+                         messageList = data
+                    }
+                    console.log('messageList', messageList)
 
+                    this.setData({
+                         messageList,
+                         hiddenLoading: true
+                    })
+                    wx.hideNavigationBarLoading()
+                    // console.clear()
                })
-               .catch(err => {
-                         console.log(err)
-                         wx.hideToast();
-                         wx.hideNavigationBarLoading();
-                         wx.hideLoading();
-                    }
+               .catch(res => {
+                    console.log(res)
+                    wx.hideNavigationBarLoading()
+               })
 
-
-               )
      },
-
      //文字展开隐藏
      bindOverflow(e) {
           const data = this.data.messageList
@@ -478,9 +401,9 @@ Page({
                                    title: '删除成功',
                               });
                               this.setData({
-                                   paging: 20
+                                   limit: 20
                               });
-                              this.messageQuery();
+                              this.getMessageData();
                          }
                          wx.hideNavigationBarLoading()
                     })
@@ -528,9 +451,9 @@ Page({
                               });
                          }
                          this.setData({
-                              paging: 20
+                              limit: 20
                          });
-                         this.messageQuery();
+                         this.getMessageData();
                          wx.hideNavigationBarLoading()
                     })
                     .catch(err => {
@@ -568,7 +491,6 @@ Page({
           // (global_openId == 'ozh_944fCkNgPWzcHuErfsHCtG1k') 
 
      },
-
      //推送
      pushSubscribeMessage(params) {
           const templateId = '-rej8CUBzdB6cA8dJw0W1SZQObZJziDqFL4v8lnujBk'; // 订阅消息模版id
@@ -595,8 +517,6 @@ Page({
                     console.log('push', res)
                })
      },
-
-
      // 监听滚动条当前位置
      onPageScroll: function (e) {
           // console.log(e)
@@ -750,7 +670,7 @@ Page({
                          })
                          .then(res => {
                               console.log(res.result)
-                              _this.messageQuery();
+                              _this.getMessageData();
                               _this.setData({
                                    inputContent: ''
                               })

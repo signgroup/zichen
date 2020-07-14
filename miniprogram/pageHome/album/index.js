@@ -160,6 +160,7 @@ Page({
 
                     }
                     console.log('photoData', photoData)
+                    console.log('urls', urls)
 
                     this.setData({
                          photoData,
@@ -205,8 +206,9 @@ Page({
      },
      //图片查看
      previewImage: function (e) {
+          console.log(e.currentTarget.dataset.src)
           wx.previewImage({
-               current: e.currentTarget.dataset.cloud, //当前图片地址
+               current: e.currentTarget.dataset.src, //当前图片地址
                urls: this.data.urls, //所有要预览的图片的地址集合 数组形式
                success: function (res) {
                     console.log("success", res)

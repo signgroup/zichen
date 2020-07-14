@@ -20,7 +20,7 @@
 
 .head-bg {
   width: 110%;
-  height: 400rpx;
+  height: 420rpx;
   position: absolute;
   top: 0;
   left: -5%;
@@ -91,8 +91,27 @@
 }
 
 .nickname {
-  color: #000;
   margin-top: 20rpx;
+  text-align: center;
+  background-image: -webkit-linear-gradient(left, #cddc39, #ff9800 25%, #cddc39 50%, #ff9800 75%, #cddc39);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-background-size: 200% 100%;
+  background-size: 200% 100%;
+  -webkit-animation: masked-animation 2s infinite linear;
+  animation: masked-animation 2s infinite linear;
+}
+
+
+@keyframes masked-animation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 .head-portrait .userinfo-avatar {
@@ -128,7 +147,7 @@
 .card-menu {
   overflow: hidden;
   border-radius: 20rpx;
-  margin:30rpx;
+  margin: 30rpx;
 
 }
 
@@ -145,7 +164,8 @@
   position: relative;
   border-bottom: 1rpx solid #eee;
 }
-.menu-item:last-child{
+
+.menu-item:last-child {
   border-bottom: 0;
 
 }
@@ -170,19 +190,21 @@
   color: #8799a3;
 
 }
-.content image{
-  width:30rpx;
+
+.content image {
+  width: 30rpx;
   height: 30rpx;
   margin-right: 20rpx;
   position: relative;
   top: 3rpx;
 }
 
-.item-right{
+.item-right {
   float: right;
 
 }
-.item-right image{
+
+.item-right image {
   border-radius: 50%;
   margin-right: 10rpx;
 }
