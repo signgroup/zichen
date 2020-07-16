@@ -107,7 +107,11 @@ Page({
                     data: {
                          db: "video",
                          skip: this.data.skip, //条件限制，根据需要传参
-                         limit: this.data.limit
+                         limit: this.data.limit,
+                         orderBy:{
+                              key:'order',
+                              value:'asc'
+                         }
                     }
                }).then(res => {
                     console.log(res)

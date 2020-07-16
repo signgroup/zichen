@@ -5,7 +5,7 @@
      position: fixed;
      right: 10rpx;
      bottom: 10rpx;
-     background-image: url("https://preview.cloud.189.cn/image/imageAction?param=18A76F08551C8757A925656E9621E096849080DEEBCE5AFCED967821E391C5B09C55C0A300F1550CDFCA9F22D82B0EED9B8865D66F9D4077DB5D967901BEEFF10A6DB4B36C8E11634FF1E7E987B484DF1ED7548B04169C9F7E4D2A2E");
+     background-image: url("http://13s.top/weimage/wxapp/rocket_up.png");
      /*background-size:424px 156px;*/
      background-size: auto 248rpx;
      height: 226rpx;

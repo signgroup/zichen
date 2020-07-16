@@ -3,7 +3,7 @@
 
 	<view class="users">
 		<view class="user-item" wx:for="{{userData}}" wx:for-index="index" wx:for-item="item" wx:key="index" bindtap="handelUserInfo" data-item="{{item}}">
-			<image src="{{item.userInfo.avatarUrl}}" mode="aspectFill" class="{{item.load?'img-show':'img-hide'}}" lazy-load='true' data-index="{{index}}" bindload='onLazyLoad' />
+			<image src="{{item.userInfo.avatarUrl}}" mode="aspectFill" class="{{item.load?'img-show':'img-hide'}}" lazy-load='true' data-index="{{index}}" />
 			<text class="ellipsis-1">{{item.userInfo.nickName}}</text>
 		</view>
 	</view>

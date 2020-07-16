@@ -20,9 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('statusBarHeight',this.data.statusBarHeight)
+    console.log('statusBarHeight', this.data.statusBarHeight)
     console.log('onLoad', options)
-    console.log('userInfo', app.globalData.userInfo )
+    console.log('userInfo', app.globalData.userInfo)
     // 获取用户信息
     if (app.globalData.userInfo == undefined) {
       wx.getSetting({
@@ -78,8 +78,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
@@ -109,12 +108,6 @@ Page({
 
   },
 
-  //跳转管理
-  goManage() {
-    wx.navigateTo({
-      url: "./../../pageManage/manage/index"
-    })
-  },
   // 用户授权登录
   onGetUserInfo: function (e) {
     console.log(e)
@@ -172,7 +165,7 @@ Page({
             wx.removeStorageSync('openId')
             _this.setData({
               userInfo: {},
-              openid:'',
+              openid: '',
               avatarUrl: 'https://preview.cloud.189.cn/image/imageAction?param=1AE036D09F5874A19A8C9109D02471C084169C1AF18A4B12472FF70DD1BAC63436F5F463D1FEA6C2143215C5930B846CC2D74F14992D825DCFB76CAFD5FF584F3FC6AE644AAE02F17E920A2C7031C2B2B4FF2682813B80C2858A5955', //默认头像
               logged: false
             })
@@ -197,7 +190,7 @@ Page({
           key: 'currentTime',
           value: 'desc'
         },
-        limit:3
+        limit: 3
       }
     }).then(res => {
       console.log(res.result.data)
@@ -211,7 +204,7 @@ Page({
   getWatchUsers() {
     let _this = this
     //orderBy不生效
-     db.collection('users')
+    db.collection('users')
       .orderBy('currentTime', 'desc')
       .limit(3)
       .watch({
@@ -231,6 +224,33 @@ Page({
           })
         }
       })
-      
   },
+  //点击菜单栏
+  handelMenu(e) {
+    let {
+      name
+    } = e.currentTarget.dataset
+    if (name === "visitor") {
+      console.log(this.data.logged)
+      if(this.data.logged){
+        wx.navigateTo({
+          url: "./../../pageMine/visitor/index"
+        })
+      }else{
+        wx.showToast({
+          icon: "none",
+          title: '请登录后查看',
+        })
+      }
+    } else if (name === 'appreciation') {
+      wx.previewImage({
+        urls: ['https://preview.cloud.189.cn/image/imageAction?param=E05384FB240D7626A0BDC44D6F3599E92F2A388BF532C9DEFF7802BF8B2AE57819DBFB45585D290230CEF49CB9A6EFE4A6201A3533F28329F5218A38769DC7280E49D30D68ED20638D23C60477781698203D0CC9D99413781FD28A95'],
+        current: 'https://preview.cloud.189.cn/image/imageAction?param=E05384FB240D7626A0BDC44D6F3599E92F2A388BF532C9DEFF7802BF8B2AE57819DBFB45585D290230CEF49CB9A6EFE4A6201A3533F28329F5218A38769DC7280E49D30D68ED20638D23C60477781698203D0CC9D99413781FD28A95' // 当前显示图片的http链接      
+      })
+    } else if (name === 'manage') {
+      wx.navigateTo({
+        url: "./../../pageManage/manage/index"
+      })
+    }
+  }
 })

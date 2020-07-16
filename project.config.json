@@ -131,6 +131,14 @@
 					"id": -1,
 					"name": "我的家庭",
 					"pathName": "pageHome/family/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "管理视频",
+					"pathName": "pageManage/video/index",
+					"query": "",
 					"scene": null
 				}
 			]
