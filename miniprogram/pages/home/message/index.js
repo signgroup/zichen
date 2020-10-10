@@ -518,17 +518,25 @@ Page({
                })
      },
      // 监听滚动条当前位置
-     onPageScroll: function (e) {
-          // console.log(e)
+     onPageScroll(e) {
+          /*
+          //此方法不推荐用，1秒内执行20次setData
+          this.setData({
+               topStatus: e.scrollTop > 400
+          });
+          */
           if (e.scrollTop > 400) {
-               this.setData({
-                    topStatus: true
-               });
+               if (!this.data.topStatus) {
+                    this.setData({
+                         topStatus: true
+                    });
+               }
           } else {
                this.setData({
                     topStatus: false
                });
           }
+
      },
     
      //管理员删除

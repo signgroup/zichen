@@ -1,7 +1,8 @@
 {
   
   "usingComponents": {
-    "top": "./../../components/top/index"
+    "top": "./../../../components/top/index"
+
 },
   "navigationBarTitleText": "视频",
   "enablePullDownRefresh": true,

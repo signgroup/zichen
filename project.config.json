@@ -1,147 +1,151 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"enhance": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": false,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"appid": "wx3edc499478251293",
-	"projectname": "zichen",
-	"libVersion": "2.9.3",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "我的相册",
-					"pathName": "pageHome/album/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/mine/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "管理相册",
-					"pathName": "pageManage/album/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "修改照片",
-					"pathName": "pageManage/updateAlbum/index",
-					"query": "id=IZvfKtqAZAWxg9s08F1zsMs7sYJkWg7FOwX5PdGLEeNO23Pu",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "上传",
-					"pathName": "pageManage/uploadAlbum/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "我的留言",
-					"pathName": "pages/home/message/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "管理",
-					"pathName": "pageManage/manage/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "首页管理",
-					"pathName": "pageManage/home/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的视频",
-					"pathName": "pages/home/video/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "访客",
-					"pathName": "pageMine/visitor/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的家庭",
-					"pathName": "pageHome/family/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "管理视频",
-					"pathName": "pageManage/video/index",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "appid": "wx3edc499478251293",
+  "projectname": "zichen",
+  "libVersion": "2.9.3",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": 0,
+          "name": "我的相册",
+          "pathName": "pageHome/album/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/mine/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "管理相册",
+          "pathName": "pageManage/album/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "修改照片",
+          "pathName": "pageManage/updateAlbum/index",
+          "query": "id=IZvfKtqAZAWxg9s08F1zsMs7sYJkWg7FOwX5PdGLEeNO23Pu",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "上传",
+          "pathName": "pageManage/uploadAlbum/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "我的留言",
+          "pathName": "pages/home/message/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "管理",
+          "pathName": "pageManage/manage/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "首页管理",
+          "pathName": "pageManage/home/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的视频",
+          "pathName": "pages/home/video/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "访客",
+          "pathName": "pageMine/visitor/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的家庭",
+          "pathName": "pageHome/family/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "管理视频",
+          "pathName": "pageManage/video/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

@@ -1,6 +1,7 @@
 const app = getApp()
 Page({
      data: {
+          hiddenLoading: false, //loading状态
           optionsListData: [],
           movableViewPosition: {
                x: 0,
@@ -176,7 +177,7 @@ Page({
                     db: "video",
                     orderBy: {
                          key: 'order',
-                         value: 'desc'
+                         value: 'asc'
                     },
                     skip: 0, //条件限制，根据需要传参
                     limit: 200
@@ -187,6 +188,7 @@ Page({
                let scrollViewHeight = app.globalData.systemInfo.windowHeight - 47;
                let scrollViewWidth = app.globalData.systemInfo.windowWidth;
                this.setData({
+                    hiddenLoading: true,
                     optionsListData: optionsList,
                     'scrollPosition.scrollViewWidth': scrollViewWidth,
                     'scrollPosition.scrollViewHeight': scrollViewHeight,

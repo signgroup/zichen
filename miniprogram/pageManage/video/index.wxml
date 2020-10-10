@@ -43,3 +43,4 @@
           <button type="default" plain="true" bindtap="btnSave">保存</button>
      </view>
 </view>
+<loading hidden="{{hiddenLoading}}" />

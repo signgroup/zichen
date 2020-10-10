@@ -37,8 +37,8 @@
           </navigator>
 
           <view class="no-data" wx:if="{{more}}">
-		<text>--没有更多了--</text>
-	</view>
+		     <text>--没有更多了--</text>
+	     </view>
      </view>
 
      

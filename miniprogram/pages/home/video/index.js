@@ -9,17 +9,17 @@ Page({
      data: {
           hiddenLoading: false, //loading状态
           videoIndex: null,
-		videoList: [],//视频数据
-		skip: 0, //分页开始取值
+          videoList: [], //视频数据
+          skip: 0, //分页开始取值
           limit: 10, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
           more: false, //没有更多数据
-               
+
      },
      /**
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
-		this.getCount()
+          this.getCount()
 
           this.getVideoData()
      },
@@ -34,8 +34,7 @@ Page({
      /**
       * 生命周期函数--监听页面显示
       */
-     onShow: function () {
-     },
+     onShow: function () {},
 
      /**
       * 生命周期函数--监听页面隐藏
@@ -55,7 +54,7 @@ Page({
       * 页面相关事件处理函数--监听用户下拉动作
       */
      onPullDownRefresh: function () {
-		this.getCount()
+          this.getCount()
           wx.showNavigationBarLoading();
           this.setData({
                skip: 0,
@@ -70,7 +69,7 @@ Page({
       * 页面上拉触底事件的处理函数
       */
      onReachBottom: function () {
-		console.log(!this.data.more)
+          console.log(!this.data.more)
           if (!this.data.more) {
                wx.showNavigationBarLoading();
                this.getVideoData();
@@ -82,9 +81,9 @@ Page({
       */
      onShareAppMessage: function () {
 
-	},
+     },
 
-	// 获取总条数
+     // 获取总条数
      getCount() {
           wx.cloud.callFunction({
                     name: 'getCount',
@@ -98,8 +97,8 @@ Page({
                     })
                })
      },
-	
-	// 获取数据
+
+     // 获取数据
      getVideoData() {
           console.log("this.data.skip", this.data.skip)
           wx.cloud.callFunction({
@@ -108,9 +107,9 @@ Page({
                          db: "video",
                          skip: this.data.skip, //条件限制，根据需要传参
                          limit: this.data.limit,
-                         orderBy:{
-                              key:'order',
-                              value:'asc'
+                         orderBy: {
+                              key: 'order',
+                              value: 'asc'
                          }
                     }
                }).then(res => {
@@ -135,7 +134,7 @@ Page({
                          //不是第一次获取 ES6 展开运算或数组拼接
                          //photoData.concat(data)
                          //[...photoData,...data]   
-                         photoData = [...videoList, ...data]
+                         videoList = [...videoList, ...data]
                     } else {
                          //第一次直接赋值
                          videoList = data
@@ -158,76 +157,89 @@ Page({
 
      },
      //垂直方向
-     loadedmetaData(e){
-          let direction=e.detail.width>e.detail.height?90:0
-          this.videoContext = wx.createVideoContext('video'+this.data.videoIndex, this);
-          this.videoContext.requestFullScreen({ direction: direction });
+     loadedmetaData(e) {
+          let direction = e.detail.width > e.detail.height ? 90 : 0
+          this.videoContext = wx.createVideoContext('video' + this.data.videoIndex, this);
+          this.videoContext.requestFullScreen({
+               direction: direction
+          });
      },
-    
-	//原本没有upStatus这个字段，所以默认值为false
-	upDown(event) {
-		var index = event.currentTarget.dataset['index'];
-		this.data.videoList[index].upStatus = !this.data.videoList[index].upStatus;
-		this.setData({
-			videoList: this.data.videoList
-		})
+
+     //原本没有upStatus这个字段，所以默认值为false
+     upDown(event) {
+          var index = event.currentTarget.dataset['index'];
+          this.data.videoList[index].upStatus = !this.data.videoList[index].upStatus;
+          this.setData({
+               videoList: this.data.videoList
+          })
      },
-     
+
      // 监听滚动条当前位置
-     onPageScroll: function (e) {
-          // console.log(e)
+     onPageScroll(e) {
+          /*
+          //此方法不推荐用，1秒内执行20次setData
+          this.setData({
+               topStatus: e.scrollTop > 400
+          });
+          */
           if (e.scrollTop > 400) {
-               this.setData({
-                    topStatus: true
-               });
+               if (!this.data.topStatus) {
+                    this.setData({
+                         topStatus: true
+                    });
+               }
           } else {
                this.setData({
                     topStatus: false
                });
           }
+
      },
-	
+
      //修改本地自增次数
-     updatePlayCount(id,index){
+     updatePlayCount(id, index) {
           wx.cloud.callFunction({
-               name: 'videoCount',
-               data: {
-               id: id,
-               }
+                    name: 'videoCount',
+                    data: {
+                         id: id,
+                    }
                })
                .then(res => {
                     console.log(res)
-               if(res.result.stats.updated===1){
+                    if (res.result.stats.updated === 1) {
 
-                    this.data.videoList[index].play++
-                    console.log(' this.data.videoList', this.data.videoList)
-               this.setData({
-                    videoList:this.data.videoList
-               })
-               }
+                         this.data.videoList[index].play++
+                         console.log(' this.data.videoList', this.data.videoList)
+                         this.setData({
+                              videoList: this.data.videoList
+                         })
+                    }
                })
      },
-	//播
-	videoPlay(event) {
-          const {index,id} = event.currentTarget.dataset;
-		if (!this.data.videoIndex) { // 没有播
-			this.setData({
-				videoIndex: index
-			})
-			var videoContext = wx.createVideoContext('video' + index)
+     //播
+     videoPlay(event) {
+          const {
+               index,
+               id
+          } = event.currentTarget.dataset;
+          if (!this.data.videoIndex) { // 没有播
+               this.setData({
+                    videoIndex: index
+               })
+               var videoContext = wx.createVideoContext('video' + index)
                videoContext.play()
-               this.updatePlayCount(id,index)
-		} else {
-			//停止正在播
-			var videoContextPrev = wx.createVideoContext('video' + this.data.videoIndex)
-			videoContextPrev.stop()
-			//将点击进行播
-			this.setData({
-				videoIndex: index
-			})
-			var videoContextCurrent = wx.createVideoContext('video' + index)
-			videoContextCurrent.play()
-		}
-	},
+               this.updatePlayCount(id, index)
+          } else {
+               //停止正在播
+               var videoContextPrev = wx.createVideoContext('video' + this.data.videoIndex)
+               videoContextPrev.stop()
+               //将点击进行播
+               this.setData({
+                    videoIndex: index
+               })
+               var videoContextCurrent = wx.createVideoContext('video' + index)
+               videoContextCurrent.play()
+          }
+     },
 
 })
