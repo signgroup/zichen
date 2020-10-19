@@ -1,5 +1,5 @@
 {
-     "name": "email",
+     "name": "pay",
      "version": "1.0.0",
      "description": "",
      "main": "index.js",
@@ -9,7 +9,7 @@
      "author": "",
      "license": "ISC",
      "dependencies": {
-          "nodemailer": "^6.4.11",
-          "wx-server-sdk": "^2.2.0"
+          "tenpay": "^2.1.18",
+          "wx-server-sdk": "~2.2.0"
      }
 }

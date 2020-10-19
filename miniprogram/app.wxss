@@ -19,11 +19,17 @@ button::after {
   border: none;
 }
 
-view, scroll-view, swiper, button, input, textarea, label, navigator, image {
+view,
+scroll-view,
+swiper,
+button,
+input,
+textarea,
+label,
+navigator,
+image {
   box-sizing: border-box;
-  
-  }
-  
+}
 
 page {
   background: #f6f6f6;
@@ -71,7 +77,8 @@ page {
 .userinfo-nickname::after {
   border: none;
 }
-.button-hover{
+
+.button-hover {
   outline: none;
   text-align: center;
 }
@@ -79,7 +86,6 @@ page {
 .disable {
   color: #888;
 }
-
 
 .request-text {
   padding: 20rpx 0;
@@ -91,7 +97,6 @@ page {
 .margin-top {
   margin-top: 30rpx;
 }
-
 
 .ellipsis-1 {
   display: -webkit-box;
@@ -143,15 +148,10 @@ page {
 
 @keyframes masked-animation {
   0% {
-       background-position: 0 0;
+    background-position: 0 0;
   }
 
   100% {
-       background-position: -100% 0;
+    background-position: -100% 0;
   }
 }
-
-
-
-
-

@@ -27,7 +27,7 @@
                >
                <!-- 懒加载默认图 -->
                     <view class="{{item.load?'img-hide':'img-default'}}">
-                         <image src='https://preview.cloud.189.cn/image/imageAction?param=4E93CB01D2262C5A9E1C8C56E4DFA143889C4A55770FA38D356781DF20C03B131C83164FE444AA57F16292990738E63F957798BAAD27AD211BC07D6462DBB721D014637B0C7F330C1B86D6BACC14CDE547281A1E8A4C93F35AEF8BCB'></image>
+                         <image src='./../../images/logo.png'></image>
                     </view>
                </image>
                <block wx:if="{{item.title}}">

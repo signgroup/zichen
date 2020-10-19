@@ -3,7 +3,7 @@
 	<view class="card-menu"  >
 		<view wx:for="{{homeData}}" wx:key="_id" class="menu-item " >
 			<view class="content">
-				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-logout.png"></image>
+				<image src="./../../images/logo.png"></image>
 				<text>{{item.name}}</text>
 			</view>
        <switch checked="{{item.state}}" data-item="{{item}}" bindchange="switchChange"/>

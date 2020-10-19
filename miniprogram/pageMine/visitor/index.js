@@ -1,7 +1,6 @@
 // miniprogram/pageMine/visitor/index.js
 import util from './../../utils/index'
 Page({
-
      /**
       * 页面的初始数据
       */
@@ -10,6 +9,7 @@ Page({
           skip: 0, //分页开始取值
           limit: 100, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
           more: false, //没有更多数据
+          triggered: false, //自定义下拉状态
      },
 
      /**
@@ -113,9 +113,9 @@ Page({
                     let userData = this.data.userData
                     if (userData.length !== 0) {
                          //不是第一次获取 ES6 展开运算或数组拼接
-                         //photoData.concat(data)
-                         //[...photoData,...data]   
-                         photoData = [...userData, ...data]
+                         //userData.concat(data)
+                         //[...userData,...data]   
+                         userData = [...userData, ...data]
                     } else {
                          //第一次直接赋值
                          userData = data
@@ -137,14 +137,16 @@ Page({
                })
 
      },
-     handelUserInfo(e){
-          let {item} = e.currentTarget.dataset
+     handelUserInfo(e) {
+          let {
+               item
+          } = e.currentTarget.dataset
           console.log(item)
-          let date= util.formatTime(item.currentTime)
+          let date = util.formatTime(item.currentTime)
           wx.showToast({
                title: `${item.userInfo.nickName}\r\n${date}`,
-               icon:'none',
-               mask:true
+               icon: 'none',
+               mask: true
           })
      }
 })

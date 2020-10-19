@@ -5,15 +5,16 @@
 		<view class="login-box slide_up" style="top:{{statusBarHeight+140}}rpx">
 			<view class="head-portrait">
 				<!-- <image src="{{avatarUrl}}"></image> -->
-				<button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{avatarUrl}})"></button>
+				<button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar"
+					style="background-image: url({{avatarUrl}})"></button>
 			</view>
-			<text class="nickname" >{{logged?userInfo.nickName:'登录'}}</text>
+			<text class="nickname">{{logged?userInfo.nickName:'登录'}}</text>
 		</view>
 	</view>
 	<view></view>
 	<!-- 登录结束 -->
 	<view class="card-menu">
-		<view   class="menu-item arrow" data-name="visitor" bindtap="handelMenu">
+		<view class="menu-item arrow" data-name="visitor" bindtap="handelMenu">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-visitor.png"></image>
 				<text>访客</text>
@@ -24,14 +25,13 @@
 				</view>
 			</view>
 		</view>
-		<view class="menu-item arrow"  data-name="appreciation" bindtap="handelMenu">
+		<view class="menu-item arrow" data-name="appreciation" bindtap="handelMenu">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-appreciation.png"></image>
 				<text>赞赏</text>
 			</view>
 		</view>
 	</view>
-
 	<view class="card-menu">
 		<view class="menu-item arrow" bindtap="loginOut">
 			<view class="content">
@@ -39,15 +39,14 @@
 				<text>退出</text>
 			</view>
 		</view>
-		<view class="menu-item arrow" data-name="manage" bindtap="handelMenu" wx:if="{{openid==='ozh_943nwfhAIxlvAoohEbw_nm88' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}">
+		<view class="menu-item arrow" data-name="manage" bindtap="handelMenu"
+			wx:if="{{openid==='ozh_943nwfhAIxlvAoohEbw_nm88' || openid==='ozh_944fCkNgPWzcHuErfsHCtG1k'}}">
 			<view class="content">
 				<image src="cloud://zichen.7a69-zichen-1258199446/icon/icon-manage.png"></image>
 				<text>管理</text>
 			</view>
 		</view>
 	</view>
-
-
 	<view class="circle"></view>
 </view>
 

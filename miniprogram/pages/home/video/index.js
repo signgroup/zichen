@@ -1,6 +1,6 @@
 // miniprogram/pages/home/video/index.js
 const db = wx.cloud.database();
-
+let skip = 0 //分页开始取值
 Page({
 
      /**
@@ -10,7 +10,7 @@ Page({
           hiddenLoading: false, //loading状态
           videoIndex: null,
           videoList: [], //视频数据
-          skip: 0, //分页开始取值
+
           limit: 10, //在小程序端默认及最大上限为 20，在云函数端默认及最大上限为 1000
           more: false, //没有更多数据
 
@@ -19,8 +19,8 @@ Page({
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
+          skip = 0
           this.getCount()
-
           this.getVideoData()
      },
 
@@ -56,9 +56,9 @@ Page({
      onPullDownRefresh: function () {
           this.getCount()
           wx.showNavigationBarLoading();
+          skip = 0
           this.setData({
-               skip: 0,
-               photoData: [],
+               videoList: [],
                more: false
           })
           this.getVideoData();
@@ -100,12 +100,11 @@ Page({
 
      // 获取数据
      getVideoData() {
-          console.log("this.data.skip", this.data.skip)
           wx.cloud.callFunction({
                     name: "getCloud",
                     data: {
                          db: "video",
-                         skip: this.data.skip, //条件限制，根据需要传参
+                         skip: skip, //条件限制，根据需要传参
                          limit: this.data.limit,
                          orderBy: {
                               key: 'order',
@@ -120,9 +119,7 @@ Page({
                     let urls = []
                     //判断返回条数
                     if (data.length === this.data.limit) {
-                         this.setData({
-                              skip: this.data.skip + this.data.limit
-                         })
+                         skip = skip + this.data.limit
                     } else {
                          //more=true 没有数据啦
                          this.setData({
@@ -132,8 +129,8 @@ Page({
                     let videoList = this.data.videoList
                     if (videoList.length !== 0) {
                          //不是第一次获取 ES6 展开运算或数组拼接
-                         //photoData.concat(data)
-                         //[...photoData,...data]   
+                         //videoList.concat(data)
+                         //[...videoList,...data]   
                          videoList = [...videoList, ...data]
                     } else {
                          //第一次直接赋值
@@ -208,7 +205,7 @@ Page({
                     console.log(res)
                     if (res.result.stats.updated === 1) {
 
-                         this.data.videoList[index].play++
+                         // this.data.videoList[index].play++
                          console.log(' this.data.videoList', this.data.videoList)
                          this.setData({
                               videoList: this.data.videoList

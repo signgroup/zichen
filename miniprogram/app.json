@@ -2,7 +2,6 @@
      "pages": [
           "pages/home/index",
           "pages/mine/index"
-
      ],
      "subpackages": [
           {

@@ -1,18 +1,20 @@
 <!--pages/home/index.wxml-->
 <view class="scene" style="{{sceneData}}">
-	<view class="star" wx:for="{{startData}}" wx:for-index="index" wx:for-item="item" wx:key="index" style="{{item}}"></view>
+	<view class="star" wx:for="{{startData}}" wx:for-index="index" wx:for-item="item" wx:key="index" style="{{item}}">
+	</view>
 
 	<view class="hill"></view>
 	<view class="moon"></view>
 
 	<view class="lights">
-		<view class="light" wx:for="{{lightData}}" wx:for-index="index" wx:for-item="item" wx:key="index" style="{{item}}"></view>
+		<view class="light" wx:for="{{lightData}}" wx:for-index="index" wx:for-item="item" wx:key="index" style="{{item}}">
+		</view>
 	</view>
 
 	<view class="plate-box">
 		<view class="plate">
-
-			<view class="ball" wx:for="{{homeNavData}}" wx:for-index="index" wx:for-item="item" bindtap="ballClick" data-item="{{item}}" wx:key="_id">
+			<view class="ball" wx:for="{{homeNavData}}" wx:for-index="index" wx:for-item="item" bindtap="ballClick"
+				data-item="{{item}}" wx:key="_id">
 				<view class="face">
 					<!-- 眼睛 -->
 					<view class="eye eye-l"></view>
@@ -24,14 +26,12 @@
 						<view class="kiss"></view>
 						<view class="kiss"></view>
 					</view>
-
 				</view>
 				<!-- 文字 -->
 				<view class="ball-text " wx:if="{{item.state}}">
 					<text class="word " data-text="{{item.name}}"></text>
 				</view>
 			</view>
-
 		</view>
 	</view>
 </view>

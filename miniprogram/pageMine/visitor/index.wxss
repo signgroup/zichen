@@ -2,7 +2,6 @@
 
 
 .users {
-
      height: 100%;
      display: flex;
      flex-wrap: wrap;
@@ -28,18 +27,13 @@
      border-radius: 50%;
 }
 
-
 .user-item text {
      font-size: 24rpx;
 }
 
-
-
-
 .vistor {
      background: linear-gradient(#A1E5E5, #1987AA);
      width: 100%;
-     height: 100vh;
      color: #fff;
      background-size: 200% 100%;
      overflow: hidden;

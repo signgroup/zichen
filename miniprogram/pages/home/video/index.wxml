@@ -3,25 +3,29 @@
 	<block wx:for="{{videoList}}" wx:for-index="index" wx:for-item="item" wx:key="index">
 		<view class='video-item'>
 			<view class='wrapper'>
-				<video  class='video-style' wx:if='{{index==videoIndex}}' id='video{{index}}' autoplay='{{true}}' show-center-play-btn="{{false}}" src='{{item.path}}' enable-play-gesture="true" show-mute-btn="true" show-screen-lock-button="true"  enable-auto-rotation="true" bindloadedmetadata="loadedmetaData"
-                    title="{{item.title}}" />
-				 <block  wx:else>
+				<video class='video-style' wx:if='{{index==videoIndex}}' id='video{{index}}' autoplay='{{true}}'
+					show-center-play-btn="{{false}}" src='{{item.path}}' enable-play-gesture="true" show-mute-btn="true"
+					show-screen-lock-button="true" enable-auto-rotation="true" bindloadedmetadata="loadedmetaData"
+					title="{{item.title}}" />
+				<block wx:else>
 					<image class='video-image' mode='aspectFill' src='{{item.coverimg}}'></image>
-					<image class='videoPlay' data-id="{{item._id}}"  data-index='{{index}}' bindtap='videoPlay' src='./../../../images/play.png'></image>
+					<image class='videoPlay' data-index='{{index}}' data-id="{{item._id}}" bindtap='videoPlay'
+						src='cloud://zichen.7a69-zichen-1258199446/icon/play.png'></image>
 					<text class="duration">{{item.time}}</text>
 				</block>
 			</view>
 			<view class='video-name'>{{item.title}}</view>
 			<view class="video-cound"><text>播放：</text><text>{{item.play}}次</text></view>
 			<block wx:if="{{item.description}}">
-			<view class='video-desc' style="{{item.upStatus?'':'display:-webkit-box'}}" data-index="{{index}}" bindtap='upDown'>{{item.description}}</view>
+				<view class='video-desc' style="{{item.upStatus?'':'display:-webkit-box'}}" data-index="{{index}}"
+					bindtap='upDown'>{{item.description}}</view>
 			</block>
 		</view>
 	</block>
 	<view class="no-data" wx:if="{{more}}">
 		<text>--没有更多了--</text>
 	</view>
-     <!-- 返回顶部 -->
+	<!-- 返回顶部 -->
 	<top topStatus="{{topStatus}}" />
 </view>
 <loading hidden="{{hiddenLoading}}"></loading>

@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarUrl: 'https://preview.cloud.189.cn/image/imageAction?param=1AE036D09F5874A19A8C9109D02471C084169C1AF18A4B12472FF70DD1BAC63436F5F463D1FEA6C2143215C5930B846CC2D74F14992D825DCFB76CAFD5FF584F3FC6AE644AAE02F17E920A2C7031C2B2B4FF2682813B80C2858A5955', //默认头像
+    avatarUrl: './../../images/logo.png', //默认头像
     hiddenLoading: false, //loading是否隐藏
     userInfo: {}, //用户信息
     logged: false, //授权记录
