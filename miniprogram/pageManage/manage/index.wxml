@@ -1,2 +1,29 @@
-<!--pageManage/manage/index.wxml-->
-<text>pageManage/manage/index.wxml</text>
+<view class="main-container">
+	<view class="app-box" style="padding-top:{{statusBarHeight+45}}px">
+
+		<view class="app-li {{index==current?'moving':'normal'}}" wx:for="{{appList}}" data-index="{{index}}" wx:key="_id" data-item="{{item}}" bindtap="jumpClick">
+			<!-- <image data-index="{{index}}" src="{{item.src}}" /> -->
+
+
+<image
+               src="{{item.src}}"
+               mode="aspectFill"  
+               class="{{item.load?'img-show':'img-hide'}}" 
+               lazy-load='true'
+               data-index="{{index}}"
+               bindload='onLazyLoad'
+               >
+               <!-- 懒加载默认图 -->
+                    <view class="{{item.load?'img-hide':'img-default'}}">
+                         <image src='https://preview.cloud.189.cn/image/imageAction?param=4E93CB01D2262C5A9E1C8C56E4DFA143889C4A55770FA38D356781DF20C03B131C83164FE444AA57F16292990738E63F957798BAAD27AD211BC07D6462DBB721D014637B0C7F330C1B86D6BACC14CDE547281A1E8A4C93F35AEF8BCB'></image>
+                    </view>
+               </image>
+
+
+			<text>{{item.name}}</text>
+		</view>
+	</view>
+</view>
+
+<background />
+<loading hidden="{{hiddenLoading}}" />
